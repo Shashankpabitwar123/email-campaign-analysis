@@ -1,5 +1,7 @@
 # Email Campaign Analysis
 
+**[Live Report](https://email-campaign-analysis-shashank.shashankpabitwar.chatgpt.site)** · **[Excel Workbook](artifacts/Email_Campaign_Budget.xlsx)** · **[Analysis Notebook](artifacts/Email_Campaign_Analysis.ipynb)**
+
 **Did an email cause additional purchases, and would repeating it be worth the cost?**
 
 An independent portfolio project by **Shashank Pabitwar**, analyzing a historical, randomized experiment involving 64,000 customers. The project connects SQL data preparation, statistical inference, Excel business modeling and an interactive report.
@@ -29,7 +31,7 @@ The men's email increased conversion by **0.68 percentage points** versus no ema
 - [Interview guide](docs/interview-guide.md): explain the project and answer the difficult questions.
 - [Resume description](docs/resume-description.md): concise, evidence-backed wording.
 
-The public report URL is recorded in `docs/project-links.md` once publication is verified. The website is a published snapshot of this analysis; it is not connected to a live company database.
+All verified links are in [project-links.md](docs/project-links.md). The website is a published snapshot of this analysis; it is not connected to a live company database. A [Power BI companion kit](powerbi/README.md) is included as prepared CSV and DAX source; it is not a completed native Power BI report.
 
 ## What this demonstrates
 

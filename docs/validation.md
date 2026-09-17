@@ -17,4 +17,4 @@ The workbook was rendered with the authoring engine and read back from XLSX. It 
 
 Power BI CSVs and DAX are a prepared companion kit. A native Power BI report and `.pbix` file were not created or validated. The public interactive website is a separate completed implementation.
 
-Public hosting and repository links are recorded in `project-links.md` after their publication checks. The analysis is a fixed historical snapshot, not live data or a deployed campaign.
+Public hosting and repository links are recorded in `project-links.md`. The deployment succeeded with public access, and the uploaded HTML and snapshot were read back with matching hashes. The public GitHub repository's analysis workflow passed on an independent Linux runner. The analysis is a fixed historical snapshot, not live data or a deployed campaign.
