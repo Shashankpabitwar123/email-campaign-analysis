@@ -1,0 +1,542 @@
+[
+  {
+    "campaign":"Men's merchandise",
+    "prior_channel":"Multichannel",
+    "recency_band":"1\u20133 months",
+    "newbie":0,
+    "customers":437,
+    "purchasers":11.0,
+    "visitors":108.0,
+    "total_revenue":1136.32
+  },
+  {
+    "campaign":"Men's merchandise",
+    "prior_channel":"Multichannel",
+    "recency_band":"1\u20133 months",
+    "newbie":1,
+    "customers":764,
+    "purchasers":11.0,
+    "visitors":169.0,
+    "total_revenue":1195.08
+  },
+  {
+    "campaign":"Men's merchandise",
+    "prior_channel":"Multichannel",
+    "recency_band":"4\u20136 months",
+    "newbie":0,
+    "customers":236,
+    "purchasers":4.0,
+    "visitors":62.0,
+    "total_revenue":617.54
+  },
+  {
+    "campaign":"Men's merchandise",
+    "prior_channel":"Multichannel",
+    "recency_band":"4\u20136 months",
+    "newbie":1,
+    "customers":328,
+    "purchasers":5.0,
+    "visitors":66.0,
+    "total_revenue":413.48
+  },
+  {
+    "campaign":"Men's merchandise",
+    "prior_channel":"Multichannel",
+    "recency_band":"7\u201312 months",
+    "newbie":0,
+    "customers":385,
+    "purchasers":9.0,
+    "visitors":81.0,
+    "total_revenue":720.96
+  },
+  {
+    "campaign":"Men's merchandise",
+    "prior_channel":"Multichannel",
+    "recency_band":"7\u201312 months",
+    "newbie":1,
+    "customers":427,
+    "purchasers":4.0,
+    "visitors":59.0,
+    "total_revenue":619.31
+  },
+  {
+    "campaign":"Men's merchandise",
+    "prior_channel":"Phone",
+    "recency_band":"1\u20133 months",
+    "newbie":0,
+    "customers":1467,
+    "purchasers":24.0,
+    "visitors":335.0,
+    "total_revenue":2712.74
+  },
+  {
+    "campaign":"Men's merchandise",
+    "prior_channel":"Phone",
+    "recency_band":"1\u20133 months",
+    "newbie":1,
+    "customers":1667,
+    "purchasers":26.0,
+    "visitors":314.0,
+    "total_revenue":3093.8
+  },
+  {
+    "campaign":"Men's merchandise",
+    "prior_channel":"Phone",
+    "recency_band":"4\u20136 months",
+    "newbie":0,
+    "customers":1079,
+    "purchasers":10.0,
+    "visitors":188.0,
+    "total_revenue":914.3
+  },
+  {
+    "campaign":"Men's merchandise",
+    "prior_channel":"Phone",
+    "recency_band":"4\u20136 months",
+    "newbie":1,
+    "customers":955,
+    "purchasers":3.0,
+    "visitors":126.0,
+    "total_revenue":236.52
+  },
+  {
+    "campaign":"Men's merchandise",
+    "prior_channel":"Phone",
+    "recency_band":"7\u201312 months",
+    "newbie":0,
+    "customers":2131,
+    "purchasers":20.0,
+    "visitors":372.0,
+    "total_revenue":1927.84
+  },
+  {
+    "campaign":"Men's merchandise",
+    "prior_channel":"Phone",
+    "recency_band":"7\u201312 months",
+    "newbie":1,
+    "customers":1941,
+    "purchasers":17.0,
+    "visitors":169.0,
+    "total_revenue":2281.59
+  },
+  {
+    "campaign":"Men's merchandise",
+    "prior_channel":"Web",
+    "recency_band":"1\u20133 months",
+    "newbie":0,
+    "customers":1564,
+    "purchasers":30.0,
+    "visitors":414.0,
+    "total_revenue":4221.14
+  },
+  {
+    "campaign":"Men's merchandise",
+    "prior_channel":"Web",
+    "recency_band":"1\u20133 months",
+    "newbie":1,
+    "customers":1570,
+    "purchasers":20.0,
+    "visitors":324.0,
+    "total_revenue":2512.81
+  },
+  {
+    "campaign":"Men's merchandise",
+    "prior_channel":"Web",
+    "recency_band":"4\u20136 months",
+    "newbie":0,
+    "customers":1098,
+    "purchasers":16.0,
+    "visitors":252.0,
+    "total_revenue":1150.59
+  },
+  {
+    "campaign":"Men's merchandise",
+    "prior_channel":"Web",
+    "recency_band":"4\u20136 months",
+    "newbie":1,
+    "customers":977,
+    "purchasers":11.0,
+    "visitors":153.0,
+    "total_revenue":1375.97
+  },
+  {
+    "campaign":"Men's merchandise",
+    "prior_channel":"Web",
+    "recency_band":"7\u201312 months",
+    "newbie":0,
+    "customers":2224,
+    "purchasers":24.0,
+    "visitors":435.0,
+    "total_revenue":2671.51
+  },
+  {
+    "campaign":"Men's merchandise",
+    "prior_channel":"Web",
+    "recency_band":"7\u201312 months",
+    "newbie":1,
+    "customers":2057,
+    "purchasers":22.0,
+    "visitors":267.0,
+    "total_revenue":2510.19
+  },
+  {
+    "campaign":"No email",
+    "prior_channel":"Multichannel",
+    "recency_band":"1\u20133 months",
+    "newbie":0,
+    "customers":420,
+    "purchasers":8.0,
+    "visitors":74.0,
+    "total_revenue":744.1
+  },
+  {
+    "campaign":"No email",
+    "prior_channel":"Multichannel",
+    "recency_band":"1\u20133 months",
+    "newbie":1,
+    "customers":796,
+    "purchasers":6.0,
+    "visitors":113.0,
+    "total_revenue":339.08
+  },
+  {
+    "campaign":"No email",
+    "prior_channel":"Multichannel",
+    "recency_band":"4\u20136 months",
+    "newbie":0,
+    "customers":227,
+    "purchasers":1.0,
+    "visitors":41.0,
+    "total_revenue":328.36
+  },
+  {
+    "campaign":"No email",
+    "prior_channel":"Multichannel",
+    "recency_band":"4\u20136 months",
+    "newbie":1,
+    "customers":358,
+    "purchasers":2.0,
+    "visitors":32.0,
+    "total_revenue":159.06
+  },
+  {
+    "campaign":"No email",
+    "prior_channel":"Multichannel",
+    "recency_band":"7\u201312 months",
+    "newbie":0,
+    "customers":415,
+    "purchasers":0.0,
+    "visitors":47.0,
+    "total_revenue":0.0
+  },
+  {
+    "campaign":"No email",
+    "prior_channel":"Multichannel",
+    "recency_band":"7\u201312 months",
+    "newbie":1,
+    "customers":390,
+    "purchasers":1.0,
+    "visitors":28.0,
+    "total_revenue":34.02
+  },
+  {
+    "campaign":"No email",
+    "prior_channel":"Phone",
+    "recency_band":"1\u20133 months",
+    "newbie":0,
+    "customers":1497,
+    "purchasers":15.0,
+    "visitors":213.0,
+    "total_revenue":1848.23
+  },
+  {
+    "campaign":"No email",
+    "prior_channel":"Phone",
+    "recency_band":"1\u20133 months",
+    "newbie":1,
+    "customers":1628,
+    "purchasers":9.0,
+    "visitors":150.0,
+    "total_revenue":1314.82
+  },
+  {
+    "campaign":"No email",
+    "prior_channel":"Phone",
+    "recency_band":"4\u20136 months",
+    "newbie":0,
+    "customers":1064,
+    "purchasers":7.0,
+    "visitors":138.0,
+    "total_revenue":476.35
+  },
+  {
+    "campaign":"No email",
+    "prior_channel":"Phone",
+    "recency_band":"4\u20136 months",
+    "newbie":1,
+    "customers":993,
+    "purchasers":4.0,
+    "visitors":53.0,
+    "total_revenue":360.45
+  },
+  {
+    "campaign":"No email",
+    "prior_channel":"Phone",
+    "recency_band":"7\u201312 months",
+    "newbie":0,
+    "customers":2137,
+    "purchasers":14.0,
+    "visitors":199.0,
+    "total_revenue":1980.97
+  },
+  {
+    "campaign":"No email",
+    "prior_channel":"Phone",
+    "recency_band":"7\u201312 months",
+    "newbie":1,
+    "customers":2008,
+    "purchasers":1.0,
+    "visitors":60.0,
+    "total_revenue":29.99
+  },
+  {
+    "campaign":"No email",
+    "prior_channel":"Web",
+    "recency_band":"1\u20133 months",
+    "newbie":0,
+    "customers":1516,
+    "purchasers":21.0,
+    "visitors":282.0,
+    "total_revenue":2068.25
+  },
+  {
+    "campaign":"No email",
+    "prior_channel":"Web",
+    "recency_band":"1\u20133 months",
+    "newbie":1,
+    "customers":1581,
+    "purchasers":8.0,
+    "visitors":193.0,
+    "total_revenue":703.65
+  },
+  {
+    "campaign":"No email",
+    "prior_channel":"Web",
+    "recency_band":"4\u20136 months",
+    "newbie":0,
+    "customers":1096,
+    "purchasers":6.0,
+    "visitors":151.0,
+    "total_revenue":769.23
+  },
+  {
+    "campaign":"No email",
+    "prior_channel":"Web",
+    "recency_band":"4\u20136 months",
+    "newbie":1,
+    "customers":1028,
+    "purchasers":6.0,
+    "visitors":89.0,
+    "total_revenue":381.0
+  },
+  {
+    "campaign":"No email",
+    "prior_channel":"Web",
+    "recency_band":"7\u201312 months",
+    "newbie":0,
+    "customers":2239,
+    "purchasers":10.0,
+    "visitors":274.0,
+    "total_revenue":1709.51
+  },
+  {
+    "campaign":"No email",
+    "prior_channel":"Web",
+    "recency_band":"7\u201312 months",
+    "newbie":1,
+    "customers":1913,
+    "purchasers":3.0,
+    "visitors":125.0,
+    "total_revenue":661.26
+  },
+  {
+    "campaign":"Women's merchandise",
+    "prior_channel":"Multichannel",
+    "recency_band":"1\u20133 months",
+    "newbie":0,
+    "customers":410,
+    "purchasers":7.0,
+    "visitors":82.0,
+    "total_revenue":822.59
+  },
+  {
+    "campaign":"Women's merchandise",
+    "prior_channel":"Multichannel",
+    "recency_band":"1\u20133 months",
+    "newbie":1,
+    "customers":814,
+    "purchasers":15.0,
+    "visitors":166.0,
+    "total_revenue":1850.36
+  },
+  {
+    "campaign":"Women's merchandise",
+    "prior_channel":"Multichannel",
+    "recency_band":"4\u20136 months",
+    "newbie":0,
+    "customers":237,
+    "purchasers":1.0,
+    "visitors":37.0,
+    "total_revenue":29.99
+  },
+  {
+    "campaign":"Women's merchandise",
+    "prior_channel":"Multichannel",
+    "recency_band":"4\u20136 months",
+    "newbie":1,
+    "customers":343,
+    "purchasers":4.0,
+    "visitors":51.0,
+    "total_revenue":678.26
+  },
+  {
+    "campaign":"Women's merchandise",
+    "prior_channel":"Multichannel",
+    "recency_band":"7\u201312 months",
+    "newbie":0,
+    "customers":371,
+    "purchasers":6.0,
+    "visitors":69.0,
+    "total_revenue":965.45
+  },
+  {
+    "campaign":"Women's merchandise",
+    "prior_channel":"Multichannel",
+    "recency_band":"7\u201312 months",
+    "newbie":1,
+    "customers":404,
+    "purchasers":3.0,
+    "visitors":48.0,
+    "total_revenue":226.63
+  },
+  {
+    "campaign":"Women's merchandise",
+    "prior_channel":"Phone",
+    "recency_band":"1\u20133 months",
+    "newbie":0,
+    "customers":1528,
+    "purchasers":13.0,
+    "visitors":270.0,
+    "total_revenue":1734.09
+  },
+  {
+    "campaign":"Women's merchandise",
+    "prior_channel":"Phone",
+    "recency_band":"1\u20133 months",
+    "newbie":1,
+    "customers":1621,
+    "purchasers":19.0,
+    "visitors":230.0,
+    "total_revenue":2042.52
+  },
+  {
+    "campaign":"Women's merchandise",
+    "prior_channel":"Phone",
+    "recency_band":"4\u20136 months",
+    "newbie":0,
+    "customers":1100,
+    "purchasers":9.0,
+    "visitors":179.0,
+    "total_revenue":1324.16
+  },
+  {
+    "campaign":"Women's merchandise",
+    "prior_channel":"Phone",
+    "recency_band":"4\u20136 months",
+    "newbie":1,
+    "customers":965,
+    "purchasers":3.0,
+    "visitors":94.0,
+    "total_revenue":365.49
+  },
+  {
+    "campaign":"Women's merchandise",
+    "prior_channel":"Phone",
+    "recency_band":"7\u201312 months",
+    "newbie":0,
+    "customers":2195,
+    "purchasers":12.0,
+    "visitors":301.0,
+    "total_revenue":1268.82
+  },
+  {
+    "campaign":"Women's merchandise",
+    "prior_channel":"Phone",
+    "recency_band":"7\u201312 months",
+    "newbie":1,
+    "customers":2045,
+    "purchasers":11.0,
+    "visitors":172.0,
+    "total_revenue":1555.38
+  },
+  {
+    "campaign":"Women's merchandise",
+    "prior_channel":"Web",
+    "recency_band":"1\u20133 months",
+    "newbie":0,
+    "customers":1518,
+    "purchasers":15.0,
+    "visitors":344.0,
+    "total_revenue":1027.62
+  },
+  {
+    "campaign":"Women's merchandise",
+    "prior_channel":"Web",
+    "recency_band":"1\u20133 months",
+    "newbie":1,
+    "customers":1595,
+    "purchasers":19.0,
+    "visitors":269.0,
+    "total_revenue":2270.72
+  },
+  {
+    "campaign":"Women's merchandise",
+    "prior_channel":"Web",
+    "recency_band":"4\u20136 months",
+    "newbie":0,
+    "customers":1057,
+    "purchasers":11.0,
+    "visitors":180.0,
+    "total_revenue":2209.78
+  },
+  {
+    "campaign":"Women's merchandise",
+    "prior_channel":"Web",
+    "recency_band":"4\u20136 months",
+    "newbie":1,
+    "customers":1051,
+    "purchasers":10.0,
+    "visitors":154.0,
+    "total_revenue":1023.06
+  },
+  {
+    "campaign":"Women's merchandise",
+    "prior_channel":"Web",
+    "recency_band":"7\u201312 months",
+    "newbie":0,
+    "customers":2208,
+    "purchasers":18.0,
+    "visitors":385.0,
+    "total_revenue":1765.34
+  },
+  {
+    "campaign":"Women's merchandise",
+    "prior_channel":"Web",
+    "recency_band":"7\u201312 months",
+    "newbie":1,
+    "customers":1925,
+    "purchasers":13.0,
+    "visitors":207.0,
+    "total_revenue":1877.85
+  }
+]

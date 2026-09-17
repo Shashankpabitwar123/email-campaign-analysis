@@ -1,0 +1,50 @@
+{
+  "engine": "artifact-tool",
+  "checks": [
+    {
+      "check": "Default scenario matches Python",
+      "passed": true
+    },
+    {
+      "check": "Zero margin gives costs only",
+      "passed": true
+    },
+    {
+      "check": "Zero recipients retains fixed costs",
+      "passed": true
+    },
+    {
+      "check": "Campaign selection changes result",
+      "passed": true
+    },
+    {
+      "check": "Budget: no displayed formula errors",
+      "passed": true
+    },
+    {
+      "check": "Campaigns: no displayed formula errors",
+      "passed": true
+    },
+    {
+      "check": "Segments: no displayed formula errors",
+      "passed": true
+    },
+    {
+      "check": "Source data: no displayed formula errors",
+      "passed": true
+    },
+    {
+      "check": "Guide: no displayed formula errors",
+      "passed": true
+    },
+    {
+      "check": "Workbook customer total",
+      "passed": true
+    },
+    {
+      "check": "Workbook revenue total",
+      "passed": true
+    }
+  ],
+  "defaultResult": 2849.1357794726823
+}

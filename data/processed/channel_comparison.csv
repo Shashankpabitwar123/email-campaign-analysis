@@ -1,0 +1,7 @@
+campaign,prior_channel,customers,control_customers,purchasers,control_purchasers,conversion_difference,revenue_difference,exploratory_channel_rank
+Men's merchandise,Multichannel,2577,2606,44.0,18.0,0.010166979815243827,1.2091294052619082,1
+Men's merchandise,Web,9490,9373,123.0,54.0,0.007199782528948642,0.8504486670398349,2
+Men's merchandise,Phone,9240,9327,100.0,50.0,0.005461730292865705,0.5640743919691334,3
+Women's merchandise,Multichannel,2579,2606,36.0,18.0,0.0070517614226959175,1.1575358651270649,1
+Women's merchandise,Web,9354,9373,86.0,54.0,0.0034326986692518498,0.4163166914707609,2
+Women's merchandise,Phone,9454,9327,67.0,50.0,0.0017261667942389536,0.23247350450950865,3

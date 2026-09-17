@@ -1,0 +1,48 @@
+// Prepared companion measures. Import FactCampaign.csv as FactCampaign and
+// DimCampaign.csv as DimCampaign; relate DimCampaign[campaign] (1) to
+// FactCampaign[campaign] (*), single-direction. Enter each measure separately.
+// These are prepared source, not a claim of a tested native Power BI report.
+
+Customers = SUM(FactCampaign[customers])
+
+Purchasers = SUM(FactCampaign[purchasers])
+
+Visitors = SUM(FactCampaign[visitors])
+
+Revenue = SUM(FactCampaign[total_revenue])
+
+Purchase Conversion = DIVIDE([Purchasers], [Customers])
+
+Visit Rate = DIVIDE([Visitors], [Customers])
+
+Revenue per Customer = DIVIDE([Revenue], [Customers])
+
+Control Conversion =
+CALCULATE(
+    [Purchase Conversion],
+    REMOVEFILTERS(DimCampaign),
+    REMOVEFILTERS(FactCampaign[campaign]),
+    DimCampaign[campaign] = "No email"
+)
+
+Control Revenue per Customer =
+CALCULATE(
+    [Revenue per Customer],
+    REMOVEFILTERS(DimCampaign),
+    REMOVEFILTERS(FactCampaign[campaign]),
+    DimCampaign[campaign] = "No email"
+)
+
+Conversion Uplift pp =
+IF(
+    HASONEVALUE(DimCampaign[campaign]),
+    ([Purchase Conversion] - [Control Conversion]) * 100,
+    BLANK()
+)
+
+Incremental Revenue per Customer =
+IF(
+    HASONEVALUE(DimCampaign[campaign]),
+    [Revenue per Customer] - [Control Revenue per Customer],
+    BLANK()
+)

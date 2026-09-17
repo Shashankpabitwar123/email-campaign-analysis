@@ -1,0 +1,17 @@
+data/raw/*.csv
+data/processed/*.duckdb*
+data/processed/customers.csv
+data/processed/dashboard_snapshot.json
+artifacts/previews/
+.venv/
+__pycache__/
+.pytest_cache/
+.DS_Store
+node_modules/
+.vercel/
+web/dist/
+web/.data-app/
+artifacts/previews/
+*.log
+
+*.inspect.ndjson

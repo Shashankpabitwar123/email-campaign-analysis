@@ -1,0 +1,137 @@
+[
+  {
+    "check": "Expected source columns",
+    "passed": true,
+    "detail": "recency, history_segment, history, mens, womens, zip_code, newbie, channel, segment, visit, conversion, spend"
+  },
+  {
+    "check": "Source population",
+    "passed": true,
+    "detail": "64000"
+  },
+  {
+    "check": "No missing source values",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "check": "mens is binary",
+    "passed": true,
+    "detail": "[0, 1]"
+  },
+  {
+    "check": "womens is binary",
+    "passed": true,
+    "detail": "[0, 1]"
+  },
+  {
+    "check": "newbie is binary",
+    "passed": true,
+    "detail": "[0, 1]"
+  },
+  {
+    "check": "visit is binary",
+    "passed": true,
+    "detail": "[0, 1]"
+  },
+  {
+    "check": "conversion is binary",
+    "passed": true,
+    "detail": "[0, 1]"
+  },
+  {
+    "check": "Recency between 1 and 12 months",
+    "passed": true,
+    "detail": "1 to 12"
+  },
+  {
+    "check": "Nonnegative historical spending",
+    "passed": true,
+    "detail": "29.99"
+  },
+  {
+    "check": "Nonnegative outcome spending",
+    "passed": true,
+    "detail": "0.0"
+  },
+  {
+    "check": "Three expected source arms",
+    "passed": true,
+    "detail": "['Mens E-Mail', 'No E-Mail', 'Womens E-Mail']"
+  },
+  {
+    "check": "Expected prior channels",
+    "passed": true,
+    "detail": "['Multichannel', 'Phone', 'Web']"
+  },
+  {
+    "check": "Expected area categories",
+    "passed": true,
+    "detail": "['Rural', 'Surburban', 'Urban']"
+  },
+  {
+    "check": "Purchase implies visit",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "check": "Positive spending matches purchase",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "check": "Source monetary values have cent precision",
+    "passed": true,
+    "detail": "Cent-level spending"
+  },
+  {
+    "check": "All assigned customers retained",
+    "passed": true,
+    "detail": "64000"
+  },
+  {
+    "check": "Extract row keys are unique",
+    "passed": true,
+    "detail": "64000"
+  },
+  {
+    "check": "Campaign mapping complete",
+    "passed": true,
+    "detail": "No unmapped assignments"
+  },
+  {
+    "check": "Arm counts reconcile",
+    "passed": true,
+    "detail": "64000"
+  },
+  {
+    "check": "Purchases reconcile",
+    "passed": true,
+    "detail": "578.0"
+  },
+  {
+    "check": "Visitors reconcile",
+    "passed": true,
+    "detail": "9394.0"
+  },
+  {
+    "check": "Revenue reconciles",
+    "passed": true,
+    "detail": "67258.13000000002"
+  },
+  {
+    "check": "Newbie flag population reconciles",
+    "passed": true,
+    "detail": "64000"
+  },
+  {
+    "check": "Prior channel population reconciles",
+    "passed": true,
+    "detail": "64000"
+  },
+  {
+    "check": "Purchase recency population reconciles",
+    "passed": true,
+    "detail": "64000"
+  }
+]
