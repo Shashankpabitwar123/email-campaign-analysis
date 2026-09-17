@@ -6,7 +6,7 @@ I explored this using Kevin Hillstrom's public experiment from **2008**, with **
 
 **[Explore the live report](https://shashankpabitwar123.github.io/email-campaign-analysis/)** · **[Open the Excel budget model](artifacts/Email_Campaign_Budget.xlsx)**
 
-## The result in plain language
+## Key findings
 
 To compare the groups fairly, these results are shown for every 1,000 customers:
 
