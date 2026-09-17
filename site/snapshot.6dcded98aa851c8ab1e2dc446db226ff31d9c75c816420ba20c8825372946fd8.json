@@ -1,0 +1,1233 @@
+{
+  "title": "Email Campaign Analysis",
+  "surface": "dashboard",
+  "status": "reviewed",
+  "buildStatus": "complete",
+  "generatedAt": "2026-09-17T16:21:17.364667+00:00",
+  "filters": [],
+  "queries": {
+    "campaign_summary": {
+      "rows": [
+        {
+          "campaign": "No email",
+          "customers": 21306,
+          "visitors": 2262.0,
+          "purchasers": 122.0,
+          "total_revenue": 13908.33,
+          "visit_rate": 0.10616727682343002,
+          "conversion_rate": 0.005726086548390125,
+          "revenue_per_customer": 0.6527893551112363,
+          "revenue_per_purchaser": 114.00270491803279,
+          "revenue_variance": 134.28637185302105,
+          "conversion_ci_low": 0.00479820584596141,
+          "conversion_ci_high": 0.006832169692008918,
+          "conversion_pct": 0.5726086548390125,
+          "visit_pct": 10.616727682343003
+        },
+        {
+          "campaign": "Men's merchandise",
+          "customers": 21307,
+          "visitors": 3894.0,
+          "purchasers": 267.0,
+          "total_revenue": 30311.69000000002,
+          "visit_rate": 0.18275684047496127,
+          "conversion_rate": 0.01253109306800582,
+          "revenue_per_customer": 1.4226165110057738,
+          "revenue_per_purchaser": 113.52692883895139,
+          "revenue_variance": 315.21179886555507,
+          "conversion_ci_low": 0.011122885010307802,
+          "conversion_ci_high": 0.014115041885257276,
+          "conversion_pct": 1.253109306800582,
+          "visit_pct": 18.275684047496128
+        },
+        {
+          "campaign": "Women's merchandise",
+          "customers": 21387,
+          "visitors": 3238.0,
+          "purchasers": 189.0,
+          "total_revenue": 23038.110000000004,
+          "visit_rate": 0.151400383410483,
+          "conversion_rate": 0.008837144059475383,
+          "revenue_per_customer": 1.077201571047833,
+          "revenue_per_purchaser": 121.89476190476192,
+          "revenue_variance": 228.49667483465936,
+          "conversion_ci_low": 0.007668063369361126,
+          "conversion_ci_high": 0.010182635003387489,
+          "conversion_pct": 0.8837144059475383,
+          "visit_pct": 15.140038341048301
+        }
+      ],
+      "source": {
+        "label": "Hillstrom public randomized email experiment (2008)",
+        "links": [
+          {
+            "label": "Original study and dataset description",
+            "url": "https://blog.minethatdata.com/2008/03/"
+          }
+        ],
+        "files": [
+          "hillstrom.csv"
+        ],
+        "executedAt": "2026-09-17T16:21:17.364667+00:00",
+        "period": "Two weeks following the 2008 email experiment; exact dates unavailable",
+        "caveats": [
+          "Independent retrospective analysis. Historical effects are not a forecast of current campaign performance.",
+          "Campaign names describe merchandise, not customer gender.",
+          "Costs, margins, delivery logs and unsubscribe outcomes are unavailable."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Original public extract",
+            "detail": "Downloaded the original MineThatData CSV. SHA-256: 0e5893329d8b93cefecc571777672028290ab69865718020c78c7284f291aece"
+          },
+          {
+            "title": "Reproducible analysis",
+            "detail": "scripts/analyze.py executes the SQL scripts, statistical estimates, regression, bootstrap and quality checks."
+          }
+        ],
+        "description": "One row per randomized assignment arm. All assigned customers remain in denominators.",
+        "metricDefinitions": [
+          {
+            "label": "Conversion rate",
+            "definition": "Customers who purchased divided by all customers assigned to that arm during the two-week outcome window."
+          },
+          {
+            "label": "Revenue per customer",
+            "definition": "Total two-week spending divided by all assigned customers, including zeros."
+          }
+        ],
+        "sql": "SELECT campaign, COUNT(*) AS customers, SUM(visited) AS visitors,\n       SUM(purchased) AS purchasers, SUM(revenue) AS total_revenue,\n       AVG(visited) AS visit_rate, AVG(purchased) AS conversion_rate,\n       AVG(revenue) AS revenue_per_customer,\n       SUM(revenue)/NULLIF(SUM(purchased),0) AS revenue_per_purchaser,\n       VAR_SAMP(revenue) AS revenue_variance\nFROM customers GROUP BY campaign ORDER BY campaign;\n",
+        "tables": [
+          "raw_customers",
+          "customers"
+        ]
+      },
+      "methods": [
+        {
+          "language": "python",
+          "code": "python scripts/analyze.py --bootstrap-draws 5000"
+        }
+      ]
+    },
+    "campaign_effects": {
+      "rows": [
+        {
+          "campaign": "Men's merchandise",
+          "difference": 0.006805006519615695,
+          "ci_low": 0.005014344671481532,
+          "ci_high": 0.008640723396917826,
+          "p_value": 1.167425327483139e-13,
+          "relative_lift": 1.188421876286328,
+          "treatment_n": 21307,
+          "control_n": 21306,
+          "treatment_purchases": 267,
+          "control_purchases": 122,
+          "family_ci_low": 0.004757913673858643,
+          "family_ci_high": 0.008910880974977421,
+          "incremental_revenue": 0.7698271558945368,
+          "revenue_ci_low": 0.49242825778104793,
+          "revenue_ci_high": 1.0647930506209635,
+          "revenue_welch_p": 1.1638149682254823e-07,
+          "incremental_visits": 0.07658956365153125,
+          "p_holm": 2.334850654966278e-13,
+          "significant": true,
+          "uplift_pp": 0.6805006519615695,
+          "lower_pp": 0.4757913673858643,
+          "upper_pp": 0.8910880974977421
+        },
+        {
+          "campaign": "Women's merchandise",
+          "difference": 0.003111057511085258,
+          "ci_low": 0.001501657131877008,
+          "ci_high": 0.004745471313672931,
+          "p_value": 0.00016499877634158652,
+          "relative_lift": 0.5433130436982172,
+          "treatment_n": 21387,
+          "control_n": 21306,
+          "treatment_purchases": 189,
+          "control_purchases": 122,
+          "family_ci_low": 0.0012692219927973388,
+          "family_ci_high": 0.004985507261654709,
+          "incremental_revenue": 0.4244122159365967,
+          "revenue_ci_low": 0.16192691595820546,
+          "revenue_ci_high": 0.6794630253046675,
+          "revenue_welch_p": 0.0011293971023632501,
+          "incremental_visits": 0.045233106587052985,
+          "p_holm": 0.00016499877634158652,
+          "significant": true,
+          "uplift_pp": 0.3111057511085258,
+          "lower_pp": 0.1269221992797339,
+          "upper_pp": 0.4985507261654709
+        }
+      ],
+      "source": {
+        "label": "Hillstrom public randomized email experiment (2008)",
+        "links": [
+          {
+            "label": "Original study and dataset description",
+            "url": "https://blog.minethatdata.com/2008/03/"
+          }
+        ],
+        "files": [
+          "hillstrom.csv"
+        ],
+        "executedAt": "2026-09-17T16:21:17.364667+00:00",
+        "period": "Two weeks following the 2008 email experiment; exact dates unavailable",
+        "caveats": [
+          "Independent retrospective analysis. Historical effects are not a forecast of current campaign performance.",
+          "Campaign names describe merchandise, not customer gender.",
+          "Costs, margins, delivery logs and unsubscribe outcomes are unavailable."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Original public extract",
+            "detail": "Downloaded the original MineThatData CSV. SHA-256: 0e5893329d8b93cefecc571777672028290ab69865718020c78c7284f291aece"
+          },
+          {
+            "title": "Reproducible analysis",
+            "detail": "scripts/analyze.py executes the SQL scripts, statistical estimates, regression, bootstrap and quality checks."
+          }
+        ],
+        "description": "Each email minus the no-email control. Conversion is primary; revenue is secondary.",
+        "metricDefinitions": [
+          {
+            "label": "Conversion uplift",
+            "definition": "Treatment conversion rate minus control conversion rate, in percentage points. Chart intervals are 97.5% Newcombe intervals per comparison, providing approximate conservative 95% family coverage across two planned contrasts."
+          },
+          {
+            "label": "Incremental revenue",
+            "definition": "Difference in mean spending per assigned customer. Individual 95% percentile intervals use 5,000 within-arm bootstrap samples with seed 20260917."
+          },
+          {
+            "label": "Modeled contribution",
+            "definition": "Contacts \u00d7 (historical incremental revenue \u00d7 assumed contribution margin \u2212 assumed send cost) \u2212 assumed fixed cost. A scenario, not realized profit."
+          }
+        ]
+      },
+      "methods": [
+        {
+          "language": "python",
+          "code": "python scripts/analyze.py --bootstrap-draws 5000"
+        }
+      ]
+    },
+    "segment_effects": {
+      "rows": [
+        {
+          "dimension": "Prior channel",
+          "segment": "Multichannel",
+          "campaign": "Men's merchandise",
+          "difference": 0.010166979815243827,
+          "ci_low": 0.0042817881956203376,
+          "ci_high": 0.01646709829669644,
+          "p_value": 0.0007918688780337055,
+          "relative_lift": 1.471952744362523,
+          "treatment_n": 2577,
+          "control_n": 2606,
+          "treatment_purchases": 44,
+          "control_purchases": 18,
+          "revenue_difference": 1.2091294052619086,
+          "scope": "Exploratory; unadjusted 95% interval",
+          "row_key": "Prior channel|Multichannel|Men's merchandise"
+        },
+        {
+          "dimension": "Prior channel",
+          "segment": "Multichannel",
+          "campaign": "Women's merchandise",
+          "difference": 0.0070517614226959175,
+          "ci_low": 0.0015044026915859857,
+          "ci_high": 0.012930507050521109,
+          "p_value": 0.013534433239804917,
+          "relative_lift": 1.0209383481969758,
+          "treatment_n": 2579,
+          "control_n": 2606,
+          "treatment_purchases": 36,
+          "control_purchases": 18,
+          "revenue_difference": 1.1575358651270653,
+          "scope": "Exploratory; unadjusted 95% interval",
+          "row_key": "Prior channel|Multichannel|Women's merchandise"
+        },
+        {
+          "dimension": "Prior channel",
+          "segment": "Phone",
+          "campaign": "Men's merchandise",
+          "difference": 0.005461730292865705,
+          "ci_low": 0.002901033131991348,
+          "ci_high": 0.008119176737570219,
+          "p_value": 3.5565772921747393e-05,
+          "relative_lift": 1.0188311688311686,
+          "treatment_n": 9240,
+          "control_n": 9327,
+          "treatment_purchases": 100,
+          "control_purchases": 50,
+          "revenue_difference": 0.5640743919691333,
+          "scope": "Exploratory; unadjusted 95% interval",
+          "row_key": "Prior channel|Phone|Men's merchandise"
+        },
+        {
+          "dimension": "Prior channel",
+          "segment": "Phone",
+          "campaign": "Women's merchandise",
+          "difference": 0.0017261667942389536,
+          "ci_low": -0.000541829321957375,
+          "ci_high": 0.004025929816947848,
+          "p_value": 0.13858023826341162,
+          "relative_lift": 0.32199915379733435,
+          "treatment_n": 9454,
+          "control_n": 9327,
+          "treatment_purchases": 67,
+          "control_purchases": 50,
+          "revenue_difference": 0.23247350450950877,
+          "scope": "Exploratory; unadjusted 95% interval",
+          "row_key": "Prior channel|Phone|Women's merchandise"
+        },
+        {
+          "dimension": "Prior channel",
+          "segment": "Web",
+          "campaign": "Men's merchandise",
+          "difference": 0.007199782528948642,
+          "ci_low": 0.0044779554015602924,
+          "ci_high": 0.010020606687091973,
+          "p_value": 3.0453575244471437e-07,
+          "relative_lift": 1.2496955859969558,
+          "treatment_n": 9490,
+          "control_n": 9373,
+          "treatment_purchases": 123,
+          "control_purchases": 54,
+          "revenue_difference": 0.8504486670398359,
+          "scope": "Exploratory; unadjusted 95% interval",
+          "row_key": "Prior channel|Web|Men's merchandise"
+        },
+        {
+          "dimension": "Prior channel",
+          "segment": "Web",
+          "campaign": "Women's merchandise",
+          "difference": 0.0034326986692518498,
+          "ci_low": 0.0009645871058347865,
+          "ci_high": 0.005963904203734674,
+          "p_value": 0.006574807010730967,
+          "relative_lift": 0.5958274930906962,
+          "treatment_n": 9354,
+          "control_n": 9373,
+          "treatment_purchases": 86,
+          "control_purchases": 54,
+          "revenue_difference": 0.4163166914707608,
+          "scope": "Exploratory; unadjusted 95% interval",
+          "row_key": "Prior channel|Web|Women's merchandise"
+        },
+        {
+          "dimension": "Purchase recency",
+          "segment": "1\u20133 months",
+          "campaign": "Men's merchandise",
+          "difference": 0.007326383487528679,
+          "ci_low": 0.0037513615198274575,
+          "ci_high": 0.010994942908095585,
+          "p_value": 6.97743289547946e-05,
+          "relative_lift": 0.8133379161229599,
+          "treatment_n": 7469,
+          "control_n": 7438,
+          "treatment_purchases": 122,
+          "control_purchases": 67,
+          "revenue_difference": 1.047598062490867,
+          "scope": "Exploratory; unadjusted 95% interval",
+          "row_key": "Purchase recency|1\u20133 months|Men's merchandise"
+        },
+        {
+          "dimension": "Purchase recency",
+          "segment": "1\u20133 months",
+          "campaign": "Women's merchandise",
+          "difference": 0.002747478721057293,
+          "ci_low": -0.0005215928964144461,
+          "ci_high": 0.006057061995321331,
+          "p_value": 0.10633053538930748,
+          "relative_lift": 0.30501114518245,
+          "treatment_n": 7486,
+          "control_n": 7438,
+          "treatment_purchases": 88,
+          "control_purchases": 67,
+          "revenue_difference": 0.3585999956035171,
+          "scope": "Exploratory; unadjusted 95% interval",
+          "row_key": "Purchase recency|1\u20133 months|Women's merchandise"
+        },
+        {
+          "dimension": "Purchase recency",
+          "segment": "4\u20136 months",
+          "campaign": "Men's merchandise",
+          "difference": 0.005030460878328993,
+          "ci_low": 0.0014446631022516096,
+          "ci_high": 0.00879971677665993,
+          "p_value": 0.007284135268819921,
+          "relative_lift": 0.9221221748506148,
+          "treatment_n": 4673,
+          "control_n": 4766,
+          "treatment_purchases": 49,
+          "control_purchases": 26,
+          "revenue_difference": 0.48838743501902304,
+          "scope": "Exploratory; unadjusted 95% interval",
+          "row_key": "Purchase recency|4\u20136 months|Men's merchandise"
+        },
+        {
+          "dimension": "Purchase recency",
+          "segment": "4\u20136 months",
+          "campaign": "Women's merchandise",
+          "difference": 0.0025396421227964865,
+          "ci_low": -0.000787026651055101,
+          "ci_high": 0.005967179378551925,
+          "p_value": 0.13422312384665525,
+          "relative_lift": 0.46553593681723293,
+          "treatment_n": 4753,
+          "control_n": 4766,
+          "treatment_purchases": 38,
+          "control_purchases": 26,
+          "revenue_difference": 0.6654827359516472,
+          "scope": "Exploratory; unadjusted 95% interval",
+          "row_key": "Purchase recency|4\u20136 months|Women's merchandise"
+        },
+        {
+          "dimension": "Purchase recency",
+          "segment": "7\u201312 months",
+          "campaign": "Men's merchandise",
+          "difference": 0.007288518809016993,
+          "ci_low": 0.0049457495165194185,
+          "ci_high": 0.009782556196832217,
+          "p_value": 1.2976546164613959e-09,
+          "relative_lift": 2.2875895930921613,
+          "treatment_n": 9165,
+          "control_n": 9102,
+          "treatment_purchases": 96,
+          "control_purchases": 29,
+          "revenue_difference": 0.6857704463075507,
+          "scope": "Exploratory; unadjusted 95% interval",
+          "row_key": "Purchase recency|7\u201312 months|Men's merchandise"
+        },
+        {
+          "dimension": "Purchase recency",
+          "segment": "7\u201312 months",
+          "campaign": "Women's merchandise",
+          "difference": 0.0037006382602381197,
+          "ci_low": 0.0016584229927235593,
+          "ci_high": 0.005844858028786648,
+          "p_value": 0.0004947991899425227,
+          "relative_lift": 1.1614899808512886,
+          "treatment_n": 9148,
+          "control_n": 9102,
+          "treatment_purchases": 63,
+          "control_purchases": 29,
+          "revenue_difference": 0.35214293081461184,
+          "scope": "Exploratory; unadjusted 95% interval",
+          "row_key": "Purchase recency|7\u201312 months|Women's merchandise"
+        },
+        {
+          "dimension": "Newbie flag",
+          "segment": "Newbie = 0",
+          "campaign": "Men's merchandise",
+          "difference": 0.006206828142725938,
+          "ci_low": 0.0034356693135454835,
+          "ci_high": 0.00904533745457752,
+          "p_value": 1.4449428118449168e-05,
+          "relative_lift": 0.8031787002739625,
+          "treatment_n": 10621,
+          "control_n": 10611,
+          "treatment_purchases": 148,
+          "control_purchases": 82,
+          "revenue_difference": 0.5779669050857943,
+          "scope": "Exploratory; unadjusted 95% interval",
+          "row_key": "Newbie flag|Newbie = 0|Men's merchandise"
+        },
+        {
+          "dimension": "Newbie flag",
+          "segment": "Newbie = 0",
+          "campaign": "Women's merchandise",
+          "difference": 0.0009318089434356032,
+          "ci_low": -0.0015120874793225873,
+          "ci_high": 0.003388731729489369,
+          "p_value": 0.49340429316380363,
+          "relative_lift": 0.12057834998530725,
+          "treatment_n": 10624,
+          "control_n": 10611,
+          "treatment_purchases": 92,
+          "control_purchases": 82,
+          "revenue_difference": 0.11395712053756446,
+          "scope": "Exploratory; unadjusted 95% interval",
+          "row_key": "Newbie flag|Newbie = 0|Women's merchandise"
+        },
+        {
+          "dimension": "Newbie flag",
+          "segment": "Newbie = 1",
+          "campaign": "Men's merchandise",
+          "difference": 0.007396000429446033,
+          "ci_low": 0.005129785018370676,
+          "ci_high": 0.00978450075640442,
+          "p_value": 1.4853397351189456e-10,
+          "relative_lift": 1.9775056148231331,
+          "treatment_n": 10686,
+          "control_n": 10695,
+          "treatment_purchases": 119,
+          "control_purchases": 40,
+          "revenue_difference": 0.9600198419292101,
+          "scope": "Exploratory; unadjusted 95% interval",
+          "row_key": "Newbie flag|Newbie = 1|Men's merchandise"
+        },
+        {
+          "dimension": "Newbie flag",
+          "segment": "Newbie = 1",
+          "campaign": "Women's merchandise",
+          "difference": 0.00527229169834824,
+          "ci_low": 0.0031656633696004366,
+          "ci_high": 0.007476967679456921,
+          "p_value": 1.149154220188829e-06,
+          "relative_lift": 1.4096789928458606,
+          "treatment_n": 10763,
+          "control_n": 10695,
+          "treatment_purchases": 97,
+          "control_purchases": 40,
+          "revenue_difference": 0.7322877956561398,
+          "scope": "Exploratory; unadjusted 95% interval",
+          "row_key": "Newbie flag|Newbie = 1|Women's merchandise"
+        }
+      ],
+      "source": {
+        "label": "Hillstrom public randomized email experiment (2008)",
+        "links": [
+          {
+            "label": "Original study and dataset description",
+            "url": "https://blog.minethatdata.com/2008/03/"
+          }
+        ],
+        "files": [
+          "hillstrom.csv"
+        ],
+        "executedAt": "2026-09-17T16:21:17.364667+00:00",
+        "period": "Two weeks following the 2008 email experiment; exact dates unavailable",
+        "caveats": [
+          "Independent retrospective analysis. Historical effects are not a forecast of current campaign performance.",
+          "Campaign names describe merchandise, not customer gender.",
+          "Costs, margins, delivery logs and unsubscribe outcomes are unavailable."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Original public extract",
+            "detail": "Downloaded the original MineThatData CSV. SHA-256: 0e5893329d8b93cefecc571777672028290ab69865718020c78c7284f291aece"
+          },
+          {
+            "title": "Reproducible analysis",
+            "detail": "scripts/analyze.py executes the SQL scripts, statistical estimates, regression, bootstrap and quality checks."
+          }
+        ],
+        "description": "Exploratory within-segment treatment comparisons. Individual 95% Newcombe intervals are unadjusted; segment selection is not validated.",
+        "metricDefinitions": [],
+        "sql": "WITH dimensions AS (\n SELECT *, 'Prior channel' AS dimension, prior_channel AS segment FROM customers\n UNION ALL SELECT *, 'Purchase recency', recency_band FROM customers\n UNION ALL SELECT *, 'Newbie flag', CASE newbie WHEN 1 THEN 'Newbie = 1' ELSE 'Newbie = 0' END FROM customers\n)\nSELECT dimension, segment, campaign, COUNT(*) AS customers,\n       SUM(purchased) AS purchasers, SUM(visited) AS visitors,\n       SUM(revenue) AS total_revenue, AVG(purchased) AS conversion_rate,\n       AVG(revenue) AS revenue_per_customer\nFROM dimensions GROUP BY dimension, segment, campaign\nORDER BY dimension, segment, campaign;\n",
+        "tables": [
+          "raw_customers",
+          "customers"
+        ]
+      },
+      "methods": [
+        {
+          "language": "python",
+          "code": "python scripts/analyze.py --bootstrap-draws 5000"
+        }
+      ]
+    },
+    "balance": {
+      "rows": [
+        {
+          "campaign": "Men's merchandise",
+          "covariate": "recency_months",
+          "smd": 0.006831532454259954,
+          "treatment_mean": 5.773642464917633,
+          "control_mean": 5.749694921618324
+        },
+        {
+          "campaign": "Men's merchandise",
+          "covariate": "bought_mens",
+          "smd": -0.0045823256374879625,
+          "treatment_mean": 0.5509456985967053,
+          "control_mean": 0.5532244438186427
+        },
+        {
+          "campaign": "Men's merchandise",
+          "covariate": "bought_womens",
+          "smd": 0.007588929691887142,
+          "treatment_mean": 0.551415027925095,
+          "control_mean": 0.5476391626771802
+        },
+        {
+          "campaign": "Men's merchandise",
+          "covariate": "newbie",
+          "smd": -0.0008918953696535328,
+          "treatment_mean": 0.5015253203172666,
+          "control_mean": 0.5019712756969867
+        },
+        {
+          "campaign": "Men's merchandise",
+          "covariate": "log_prior_spend",
+          "smd": -0.0011678531088418075,
+          "treatment_mean": 5.003654939545963,
+          "control_mean": 5.004846169751025
+        },
+        {
+          "campaign": "Men's merchandise",
+          "covariate": "prior_channel_Multichannel",
+          "smd": -0.004181536419632754,
+          "treatment_mean": 0.1209461679260337,
+          "control_mean": 0.12231296348446447
+        },
+        {
+          "campaign": "Men's merchandise",
+          "covariate": "prior_channel_Phone",
+          "smd": -0.008275992307117473,
+          "treatment_mean": 0.43366029943211154,
+          "control_mean": 0.4377640101379893
+        },
+        {
+          "campaign": "Men's merchandise",
+          "covariate": "prior_channel_Web",
+          "smd": 0.011013588354428299,
+          "treatment_mean": 0.4453935326418548,
+          "control_mean": 0.4399230263775462
+        },
+        {
+          "campaign": "Men's merchandise",
+          "covariate": "area_type_Rural",
+          "smd": 0.01365900039927897,
+          "treatment_mean": 0.1522035011967898,
+          "control_mean": 0.14732939078193935
+        },
+        {
+          "campaign": "Men's merchandise",
+          "covariate": "area_type_Suburban",
+          "smd": -0.01174335672606268,
+          "treatment_mean": 0.44590979490308347,
+          "control_mean": 0.4517506805594668
+        },
+        {
+          "campaign": "Men's merchandise",
+          "covariate": "area_type_Urban",
+          "smd": 0.0019722315768513645,
+          "treatment_mean": 0.4018867039001267,
+          "control_mean": 0.4009199286585938
+        },
+        {
+          "campaign": "Women's merchandise",
+          "covariate": "recency_months",
+          "smd": 0.005180013205688683,
+          "treatment_mean": 5.767849628278861,
+          "control_mean": 5.749694921618324
+        },
+        {
+          "campaign": "Women's merchandise",
+          "covariate": "bought_mens",
+          "smd": -0.008630731202832915,
+          "treatment_mean": 0.548931593958947,
+          "control_mean": 0.5532244438186427
+        },
+        {
+          "campaign": "Women's merchandise",
+          "covariate": "bought_womens",
+          "smd": 0.004946313992582152,
+          "treatment_mean": 0.5501005283583486,
+          "control_mean": 0.5476391626771802
+        },
+        {
+          "campaign": "Women's merchandise",
+          "covariate": "newbie",
+          "smd": 0.0025567009140795606,
+          "treatment_mean": 0.5032496376303361,
+          "control_mean": 0.5019712756969867
+        },
+        {
+          "campaign": "Women's merchandise",
+          "covariate": "log_prior_spend",
+          "smd": 0.006481166552043577,
+          "treatment_mean": 5.011439882621844,
+          "control_mean": 5.004846169751025
+        },
+        {
+          "campaign": "Women's merchandise",
+          "covariate": "prior_channel_Multichannel",
+          "smd": -0.00528289712504171,
+          "treatment_mean": 0.12058727264225931,
+          "control_mean": 0.12231296348446447
+        },
+        {
+          "campaign": "Women's merchandise",
+          "covariate": "prior_channel_Phone",
+          "smd": 0.008622833281250204,
+          "treatment_mean": 0.4420442324776733,
+          "control_mean": 0.4377640101379893
+        },
+        {
+          "campaign": "Women's merchandise",
+          "covariate": "prior_channel_Web",
+          "smd": -0.005147863897421752,
+          "treatment_mean": 0.43736849488006735,
+          "control_mean": 0.4399230263775462
+        },
+        {
+          "campaign": "Women's merchandise",
+          "covariate": "area_type_Rural",
+          "smd": 0.00395850560137286,
+          "treatment_mean": 0.14873521297984757,
+          "control_mean": 0.14732939078193935
+        },
+        {
+          "campaign": "Women's merchandise",
+          "covariate": "area_type_Suburban",
+          "smd": -0.0010891197386245202,
+          "treatment_mean": 0.45120867816898114,
+          "control_mean": 0.4517506805594668
+        },
+        {
+          "campaign": "Women's merchandise",
+          "covariate": "area_type_Urban",
+          "smd": -0.0017628666291550237,
+          "treatment_mean": 0.40005610885117127,
+          "control_mean": 0.4009199286585938
+        }
+      ],
+      "source": {
+        "label": "Hillstrom public randomized email experiment (2008)",
+        "links": [
+          {
+            "label": "Original study and dataset description",
+            "url": "https://blog.minethatdata.com/2008/03/"
+          }
+        ],
+        "files": [
+          "hillstrom.csv"
+        ],
+        "executedAt": "2026-09-17T16:21:17.364667+00:00",
+        "period": "Two weeks following the 2008 email experiment; exact dates unavailable",
+        "caveats": [
+          "Independent retrospective analysis. Historical effects are not a forecast of current campaign performance.",
+          "Campaign names describe merchandise, not customer gender.",
+          "Costs, margins, delivery logs and unsubscribe outcomes are unavailable."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Original public extract",
+            "detail": "Downloaded the original MineThatData CSV. SHA-256: 0e5893329d8b93cefecc571777672028290ab69865718020c78c7284f291aece"
+          },
+          {
+            "title": "Reproducible analysis",
+            "detail": "scripts/analyze.py executes the SQL scripts, statistical estimates, regression, bootstrap and quality checks."
+          }
+        ],
+        "description": "Standardized mean differences for pre-treatment covariates. Diagnostics support a plausibility check; they do not verify original assignment logs.",
+        "metricDefinitions": []
+      },
+      "methods": [
+        {
+          "language": "python",
+          "code": "python scripts/analyze.py --bootstrap-draws 5000"
+        }
+      ]
+    },
+    "quality": {
+      "rows": [
+        {
+          "check": "Expected source columns",
+          "passed": true,
+          "detail": "recency, history_segment, history, mens, womens, zip_code, newbie, channel, segment, visit, conversion, spend"
+        },
+        {
+          "check": "Source population",
+          "passed": true,
+          "detail": "64000"
+        },
+        {
+          "check": "No missing source values",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "check": "mens is binary",
+          "passed": true,
+          "detail": "[0, 1]"
+        },
+        {
+          "check": "womens is binary",
+          "passed": true,
+          "detail": "[0, 1]"
+        },
+        {
+          "check": "newbie is binary",
+          "passed": true,
+          "detail": "[0, 1]"
+        },
+        {
+          "check": "visit is binary",
+          "passed": true,
+          "detail": "[0, 1]"
+        },
+        {
+          "check": "conversion is binary",
+          "passed": true,
+          "detail": "[0, 1]"
+        },
+        {
+          "check": "Recency between 1 and 12 months",
+          "passed": true,
+          "detail": "1 to 12"
+        },
+        {
+          "check": "Nonnegative historical spending",
+          "passed": true,
+          "detail": "29.99"
+        },
+        {
+          "check": "Nonnegative outcome spending",
+          "passed": true,
+          "detail": "0.0"
+        },
+        {
+          "check": "Three expected source arms",
+          "passed": true,
+          "detail": "['Mens E-Mail', 'No E-Mail', 'Womens E-Mail']"
+        },
+        {
+          "check": "Expected prior channels",
+          "passed": true,
+          "detail": "['Multichannel', 'Phone', 'Web']"
+        },
+        {
+          "check": "Expected area categories",
+          "passed": true,
+          "detail": "['Rural', 'Surburban', 'Urban']"
+        },
+        {
+          "check": "Purchase implies visit",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "check": "Positive spending matches purchase",
+          "passed": true,
+          "detail": "0"
+        },
+        {
+          "check": "Source monetary values have cent precision",
+          "passed": true,
+          "detail": "Cent-level spending"
+        },
+        {
+          "check": "All assigned customers retained",
+          "passed": true,
+          "detail": "64000"
+        },
+        {
+          "check": "Extract row keys are unique",
+          "passed": true,
+          "detail": "64000"
+        },
+        {
+          "check": "Campaign mapping complete",
+          "passed": true,
+          "detail": "No unmapped assignments"
+        },
+        {
+          "check": "Arm counts reconcile",
+          "passed": true,
+          "detail": "64000"
+        },
+        {
+          "check": "Purchases reconcile",
+          "passed": true,
+          "detail": "578.0"
+        },
+        {
+          "check": "Visitors reconcile",
+          "passed": true,
+          "detail": "9394.0"
+        },
+        {
+          "check": "Revenue reconciles",
+          "passed": true,
+          "detail": "67258.13000000002"
+        },
+        {
+          "check": "Newbie flag population reconciles",
+          "passed": true,
+          "detail": "64000"
+        },
+        {
+          "check": "Prior channel population reconciles",
+          "passed": true,
+          "detail": "64000"
+        },
+        {
+          "check": "Purchase recency population reconciles",
+          "passed": true,
+          "detail": "64000"
+        }
+      ],
+      "source": {
+        "label": "Hillstrom public randomized email experiment (2008)",
+        "links": [
+          {
+            "label": "Original study and dataset description",
+            "url": "https://blog.minethatdata.com/2008/03/"
+          }
+        ],
+        "files": [
+          "hillstrom.csv"
+        ],
+        "executedAt": "2026-09-17T16:21:17.364667+00:00",
+        "period": "Two weeks following the 2008 email experiment; exact dates unavailable",
+        "caveats": [
+          "Independent retrospective analysis. Historical effects are not a forecast of current campaign performance.",
+          "Campaign names describe merchandise, not customer gender.",
+          "Costs, margins, delivery logs and unsubscribe outcomes are unavailable."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Original public extract",
+            "detail": "Downloaded the original MineThatData CSV. SHA-256: 0e5893329d8b93cefecc571777672028290ab69865718020c78c7284f291aece"
+          },
+          {
+            "title": "Reproducible analysis",
+            "detail": "scripts/analyze.py executes the SQL scripts, statistical estimates, regression, bootstrap and quality checks."
+          }
+        ],
+        "description": "Executable source and reconciliation checks. Equal profiles are retained because there is no customer identifier.",
+        "metricDefinitions": []
+      },
+      "methods": [
+        {
+          "language": "python",
+          "code": "python scripts/analyze.py --bootstrap-draws 5000"
+        }
+      ]
+    },
+    "regression": {
+      "rows": [
+        {
+          "campaign": "Men's merchandise",
+          "adjusted_difference": 0.006786493758751519,
+          "ci_low": 0.004983203443864115,
+          "ci_high": 0.008589784073638924,
+          "p_value": 1.6297077204364953e-13,
+          "method": "Linear probability model; HC3 robust standard errors"
+        },
+        {
+          "campaign": "Women's merchandise",
+          "adjusted_difference": 0.003126108126170914,
+          "ci_low": 0.00151445118679694,
+          "ci_high": 0.004737765065544888,
+          "p_value": 0.00014369833422757616,
+          "method": "Linear probability model; HC3 robust standard errors"
+        }
+      ],
+      "source": {
+        "label": "Hillstrom public randomized email experiment (2008)",
+        "links": [
+          {
+            "label": "Original study and dataset description",
+            "url": "https://blog.minethatdata.com/2008/03/"
+          }
+        ],
+        "files": [
+          "hillstrom.csv"
+        ],
+        "executedAt": "2026-09-17T16:21:17.364667+00:00",
+        "period": "Two weeks following the 2008 email experiment; exact dates unavailable",
+        "caveats": [
+          "Independent retrospective analysis. Historical effects are not a forecast of current campaign performance.",
+          "Campaign names describe merchandise, not customer gender.",
+          "Costs, margins, delivery logs and unsubscribe outcomes are unavailable."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Original public extract",
+            "detail": "Downloaded the original MineThatData CSV. SHA-256: 0e5893329d8b93cefecc571777672028290ab69865718020c78c7284f291aece"
+          },
+          {
+            "title": "Reproducible analysis",
+            "detail": "scripts/analyze.py executes the SQL scripts, statistical estimates, regression, bootstrap and quality checks."
+          }
+        ],
+        "description": "Covariate-adjusted linear probability model with HC3 standard errors. Pre-treatment covariates only; sensitivity analysis.",
+        "metricDefinitions": []
+      },
+      "methods": [
+        {
+          "language": "python",
+          "code": "python scripts/analyze.py --bootstrap-draws 5000"
+        }
+      ]
+    },
+    "power": {
+      "rows": [
+        {
+          "baseline_rate": 0.005726086548390125,
+          "absolute_uplift_pp": 0.1,
+          "power": 0.8,
+          "alpha_per_comparison": 0.025,
+          "customers_per_arm": 117433,
+          "total_three_arms": 352299,
+          "row_key": "0.1|0.8"
+        },
+        {
+          "baseline_rate": 0.005726086548390125,
+          "absolute_uplift_pp": 0.1,
+          "power": 0.9,
+          "alpha_per_comparison": 0.025,
+          "customers_per_arm": 153338,
+          "total_three_arms": 460014,
+          "row_key": "0.1|0.9"
+        },
+        {
+          "baseline_rate": 0.005726086548390125,
+          "absolute_uplift_pp": 0.2,
+          "power": 0.8,
+          "alpha_per_comparison": 0.025,
+          "customers_per_arm": 31576,
+          "total_three_arms": 94728,
+          "row_key": "0.2|0.8"
+        },
+        {
+          "baseline_rate": 0.005726086548390125,
+          "absolute_uplift_pp": 0.2,
+          "power": 0.9,
+          "alpha_per_comparison": 0.025,
+          "customers_per_arm": 41230,
+          "total_three_arms": 123690,
+          "row_key": "0.2|0.9"
+        },
+        {
+          "baseline_rate": 0.005726086548390125,
+          "absolute_uplift_pp": 0.3,
+          "power": 0.8,
+          "alpha_per_comparison": 0.025,
+          "customers_per_arm": 14989,
+          "total_three_arms": 44967,
+          "row_key": "0.3|0.8"
+        },
+        {
+          "baseline_rate": 0.005726086548390125,
+          "absolute_uplift_pp": 0.3,
+          "power": 0.9,
+          "alpha_per_comparison": 0.025,
+          "customers_per_arm": 19572,
+          "total_three_arms": 58716,
+          "row_key": "0.3|0.9"
+        },
+        {
+          "baseline_rate": 0.005726086548390125,
+          "absolute_uplift_pp": 0.5,
+          "power": 0.8,
+          "alpha_per_comparison": 0.025,
+          "customers_per_arm": 6058,
+          "total_three_arms": 18174,
+          "row_key": "0.5|0.8"
+        },
+        {
+          "baseline_rate": 0.005726086548390125,
+          "absolute_uplift_pp": 0.5,
+          "power": 0.9,
+          "alpha_per_comparison": 0.025,
+          "customers_per_arm": 7910,
+          "total_three_arms": 23730,
+          "row_key": "0.5|0.9"
+        }
+      ],
+      "source": {
+        "label": "Hillstrom public randomized email experiment (2008)",
+        "links": [
+          {
+            "label": "Original study and dataset description",
+            "url": "https://blog.minethatdata.com/2008/03/"
+          }
+        ],
+        "files": [
+          "hillstrom.csv"
+        ],
+        "executedAt": "2026-09-17T16:21:17.364667+00:00",
+        "period": "Two weeks following the 2008 email experiment; exact dates unavailable",
+        "caveats": [
+          "Independent retrospective analysis. Historical effects are not a forecast of current campaign performance.",
+          "Campaign names describe merchandise, not customer gender.",
+          "Costs, margins, delivery logs and unsubscribe outcomes are unavailable."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Original public extract",
+            "detail": "Downloaded the original MineThatData CSV. SHA-256: 0e5893329d8b93cefecc571777672028290ab69865718020c78c7284f291aece"
+          },
+          {
+            "title": "Reproducible analysis",
+            "detail": "scripts/analyze.py executes the SQL scripts, statistical estimates, regression, bootstrap and quality checks."
+          }
+        ],
+        "description": "Prospective sample-size scenarios anchored to the historical control rate. Equal allocation, two-sided alpha .025 per contrast. Normal approximation, not a duration forecast.",
+        "metricDefinitions": []
+      },
+      "methods": [
+        {
+          "language": "python",
+          "code": "python scripts/analyze.py --bootstrap-draws 5000"
+        }
+      ]
+    },
+    "revenue_sensitivity": {
+      "rows": [
+        {
+          "campaign": "Men's merchandise",
+          "original_difference": 0.7698271558945368,
+          "capped_difference": 0.659157953517834,
+          "pooled_cap": 243.6604899999983
+        },
+        {
+          "campaign": "Women's merchandise",
+          "original_difference": 0.4244122159365967,
+          "capped_difference": 0.3829172644113934,
+          "pooled_cap": 243.6604899999983
+        }
+      ],
+      "source": {
+        "label": "Hillstrom public randomized email experiment (2008)",
+        "links": [
+          {
+            "label": "Original study and dataset description",
+            "url": "https://blog.minethatdata.com/2008/03/"
+          }
+        ],
+        "files": [
+          "hillstrom.csv"
+        ],
+        "executedAt": "2026-09-17T16:21:17.364667+00:00",
+        "period": "Two weeks following the 2008 email experiment; exact dates unavailable",
+        "caveats": [
+          "Independent retrospective analysis. Historical effects are not a forecast of current campaign performance.",
+          "Campaign names describe merchandise, not customer gender.",
+          "Costs, margins, delivery logs and unsubscribe outcomes are unavailable."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Original public extract",
+            "detail": "Downloaded the original MineThatData CSV. SHA-256: 0e5893329d8b93cefecc571777672028290ab69865718020c78c7284f291aece"
+          },
+          {
+            "title": "Reproducible analysis",
+            "detail": "scripts/analyze.py executes the SQL scripts, statistical estimates, regression, bootstrap and quality checks."
+          }
+        ],
+        "description": "Sensitivity only: cap spending at pooled 99.9th percentile; original spending is retained in all primary results.",
+        "metricDefinitions": []
+      },
+      "methods": [
+        {
+          "language": "python",
+          "code": "python scripts/analyze.py --bootstrap-draws 5000"
+        }
+      ]
+    },
+    "direct_comparison": {
+      "rows": [
+        {
+          "difference": 0.003693949008530437,
+          "ci_low": 0.0017462848141901722,
+          "ci_high": 0.005662614423391559,
+          "p_value": 0.00023273215752413862,
+          "relative_lift": 0.4180025790764046,
+          "treatment_n": 21307,
+          "control_n": 21387,
+          "treatment_purchases": 267,
+          "control_purchases": 189,
+          "comparison": "Men's merchandise minus women's merchandise",
+          "revenue_difference": 0.3454149399579407,
+          "revenue_ci_low": 0.0356562284303018,
+          "revenue_ci_high": 0.6528049164799307
+        }
+      ],
+      "source": {
+        "label": "Hillstrom public randomized email experiment (2008)",
+        "links": [
+          {
+            "label": "Original study and dataset description",
+            "url": "https://blog.minethatdata.com/2008/03/"
+          }
+        ],
+        "files": [
+          "hillstrom.csv"
+        ],
+        "executedAt": "2026-09-17T16:21:17.364667+00:00",
+        "period": "Two weeks following the 2008 email experiment; exact dates unavailable",
+        "caveats": [
+          "Independent retrospective analysis. Historical effects are not a forecast of current campaign performance.",
+          "Campaign names describe merchandise, not customer gender.",
+          "Costs, margins, delivery logs and unsubscribe outcomes are unavailable."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Original public extract",
+            "detail": "Downloaded the original MineThatData CSV. SHA-256: 0e5893329d8b93cefecc571777672028290ab69865718020c78c7284f291aece"
+          },
+          {
+            "title": "Reproducible analysis",
+            "detail": "scripts/analyze.py executes the SQL scripts, statistical estimates, regression, bootstrap and quality checks."
+          }
+        ],
+        "description": "Secondary direct comparison of the two email variants. Individual 95% Newcombe conversion interval and 95% bootstrap revenue interval; not part of the primary two-comparison family.",
+        "metricDefinitions": []
+      },
+      "methods": [
+        {
+          "language": "python",
+          "code": "python scripts/analyze.py --bootstrap-draws 5000"
+        }
+      ]
+    },
+    "diagnostics": {
+      "rows": [
+        {
+          "allocation_p": 0.9036929575604196,
+          "allocation_statistic": 0.20253125000000002,
+          "max_abs_smd": 0.01365900039927897,
+          "top_revenue_customers": 64,
+          "top_revenue_share": 0.3486185238870007,
+          "spend_cap": 243.6604899999983
+        }
+      ],
+      "source": {
+        "label": "Hillstrom public randomized email experiment (2008)",
+        "links": [
+          {
+            "label": "Original study and dataset description",
+            "url": "https://blog.minethatdata.com/2008/03/"
+          }
+        ],
+        "files": [
+          "hillstrom.csv"
+        ],
+        "executedAt": "2026-09-17T16:21:17.364667+00:00",
+        "period": "Two weeks following the 2008 email experiment; exact dates unavailable",
+        "caveats": [
+          "Independent retrospective analysis. Historical effects are not a forecast of current campaign performance.",
+          "Campaign names describe merchandise, not customer gender.",
+          "Costs, margins, delivery logs and unsubscribe outcomes are unavailable."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Original public extract",
+            "detail": "Downloaded the original MineThatData CSV. SHA-256: 0e5893329d8b93cefecc571777672028290ab69865718020c78c7284f291aece"
+          },
+          {
+            "title": "Reproducible analysis",
+            "detail": "scripts/analyze.py executes the SQL scripts, statistical estimates, regression, bootstrap and quality checks."
+          }
+        ],
+        "description": "Assignment chi-square against equal allocation, maximum absolute covariate standardized difference and concentration of observed revenue.",
+        "metricDefinitions": []
+      },
+      "methods": [
+        {
+          "language": "python",
+          "code": "python scripts/analyze.py --bootstrap-draws 5000"
+        }
+      ]
+    }
+  },
+  "id": "dashboard:4f2a3e9c-a111-484a-b005-37cdd9e601fb"
+}

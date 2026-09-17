@@ -2,7 +2,7 @@
 
 **Email Campaign Analysis | SQL, Python, Excel, Statistical Analysis**
 
-[Live Report](https://email-campaign-analysis-shashank.shashankpabitwar.chatgpt.site) · [GitHub](https://github.com/Shashankpabitwar123/email-campaign-analysis)
+[Live Report](https://shashankpabitwar123.github.io/email-campaign-analysis/) · [GitHub](https://github.com/Shashankpabitwar123/email-campaign-analysis)
 
 - Analyzed a 64,000-customer randomized email experiment using SQL and Python; estimated a 0.68 percentage-point conversion uplift with confidence intervals and multiple-testing correction.
 - Built an interactive report and Excel budget model using XLOOKUP and SUMIFS; quantified revenue uncertainty with 5,000 bootstrap resamples and designed a follow-up experiment.

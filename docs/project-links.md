@@ -1,6 +1,6 @@
 # Verified project links
 
-- **[Live interactive report](https://email-campaign-analysis-shashank.shashankpabitwar.chatgpt.site)** — public access, no school Power BI account required.
+- **[Live interactive report](https://shashankpabitwar123.github.io/email-campaign-analysis/)** — public access, no school Power BI account required.
 - **[GitHub repository](https://github.com/Shashankpabitwar123/email-campaign-analysis)** — SQL, Python, aggregate data, notebook, workbook and documentation.
 - **[Excel budget workbook](https://github.com/Shashankpabitwar123/email-campaign-analysis/raw/main/artifacts/Email_Campaign_Budget.xlsx)**
 - **[Executed analysis notebook](https://github.com/Shashankpabitwar123/email-campaign-analysis/blob/main/artifacts/Email_Campaign_Analysis.ipynb)**

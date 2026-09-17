@@ -1,6 +1,6 @@
 # Email Campaign Analysis
 
-**[Live Report](https://email-campaign-analysis-shashank.shashankpabitwar.chatgpt.site)** · **[Excel Workbook](artifacts/Email_Campaign_Budget.xlsx)** · **[Analysis Notebook](artifacts/Email_Campaign_Analysis.ipynb)**
+**[Live Report](https://shashankpabitwar123.github.io/email-campaign-analysis/)** · **[Excel Workbook](artifacts/Email_Campaign_Budget.xlsx)** · **[Analysis Notebook](artifacts/Email_Campaign_Analysis.ipynb)**
 
 **Did an email cause additional purchases, and would repeating it be worth the cost?**
 
@@ -64,6 +64,8 @@ python scripts/create_notebook.py
 On Windows, activate with `.venv\Scripts\activate` instead. The historical provider serves the raw file over HTTP; the downloader checks the exact reviewed SHA-256 and stops if the bytes differ. It does not disable HTTPS certificate checks.
 
 The Excel deliverable can be opened and edited directly. Its authoring script uses the Codex-provided `@oai/artifact-tool` JavaScript package; regenerating that workbook requires that environment. Core analysis, tests, CSV outputs and the notebook use the Python packages above.
+
+The public report is hosted on **GitHub Pages** from the verified `site/` package. See [hosting and deployment](docs/hosting.md) for the publication workflow.
 
 The website's authored analysis is in `web/src/content/dashboard/`. Its included shared Data runtime owns the report controls and export behavior. The validated publication uses that runtime's pinned builder. A source build uses the included package lock and `npm ci && npm run build` in `web` with a compatible Node version; this alternative source build is not the publication path validated here. Preserve `web/AGENTS.md` and runtime integrity metadata.
 
