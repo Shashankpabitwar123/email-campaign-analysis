@@ -26,6 +26,7 @@ export function DataAppRuntime({
   createContent,
   DashboardContent,
   ReportContent,
+  publicView = false,
   hosted = globalThis.location?.hostname.endsWith(".chatgpt.site") ?? false,
 } = {}) {
   const [snapshot, setSnapshot] = useState(hosted ? null : reviewedSnapshot);
@@ -79,6 +80,7 @@ export function DataAppRuntime({
     DashboardContent={DashboardContent}
     ReportContent={ReportContent}
     hosted={hosted}
+    publicView={publicView}
     onSnapshotChange={setSnapshot}
     presentationRecord={presentationRecord}
     queryDataStore={queryDataStore}
@@ -86,7 +88,7 @@ export function DataAppRuntime({
 }
 
 function ResolvedDataApp({ snapshot, createContent, DashboardContent, ReportContent,
-  hosted, onSnapshotChange, presentationRecord, queryDataStore }) {
+  hosted, publicView, onSnapshotChange, presentationRecord, queryDataStore }) {
   // Eager apps retain complete module-scope imports. Explicit on-demand apps
   // declare dependencies through QueryDataBoundary before reading reviewed rows.
   // Keep component identities stable through later data updates and edits.
@@ -98,8 +100,9 @@ function ResolvedDataApp({ snapshot, createContent, DashboardContent, ReportCont
     <DataAppShell
       snapshot={snapshot}
       hosted={hosted}
+      publicView={publicView}
       onSnapshotChange={onSnapshotChange}
-      canEdit={!hosted || presentationRecord.canEdit === true}
+      canEdit={!publicView && (!hosted || presentationRecord.canEdit === true)}
       initialPresentation={presentationRecord.presentation}
       initialRevision={presentationRecord.revision}
       queryDataStore={queryDataStore}

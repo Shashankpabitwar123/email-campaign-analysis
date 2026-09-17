@@ -12,6 +12,7 @@ export function App({ hosted = globalThis.location?.hostname.endsWith(".chatgpt.
       DashboardContent={DashboardContent}
       ReportContent={ReportContent}
       hosted={hosted}
+      publicView
     />
   );
 }

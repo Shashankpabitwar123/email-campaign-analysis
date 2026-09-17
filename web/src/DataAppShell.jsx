@@ -188,6 +188,7 @@ function ChartEditorDialog({ component, ...props }) {
 export function DataAppShell({
   snapshot,
   hosted,
+  publicView = false,
   canEdit: ownerCanEdit = true,
   onSnapshotChange,
   initialPresentation = {},
@@ -196,14 +197,14 @@ export function DataAppShell({
   children,
 }) {
   const build = dataAppBuildState(snapshot);
-  const canEdit = ownerCanEdit && !build.active;
+  const canEdit = !publicView && ownerCanEdit && !build.active;
   const reportSurface = snapshot.surface === "report";
   useInputModality();
   const surfaceNoun = reportSurface ? "report" : "dashboard";
   const [savedPresentation] = useState(() => {
     const personal = readLocalPresentation(snapshot);
     const normalized = normalizePresentation(
-      hosted
+      hosted || publicView
         ? {
             ...initialPresentation,
             ...(personal.filters ? { filters: personal.filters } : {}),
@@ -886,11 +887,12 @@ export function DataAppShell({
     };
   }
   function actionHref(action, options, destination) {
-    if (buildBlocksAction(snapshot, action)) return null;
+    if (publicView || buildBlocksAction(snapshot, action)) return null;
     try { return dataAppActionHref(action, actionContext(options), undefined, destination); }
     catch { return null; } // Click handling reports an unrepresentable view; never offer a partial link.
   }
   async function runAction(action, options = {}) {
+    if (publicView && action !== "copy-link") return false;
     if (action === "handoff-preference-error") {
       setActionStatus("Your ChatGPT opening preference couldn't be saved in this browser.");
       return false;
@@ -1120,13 +1122,14 @@ export function DataAppShell({
       <DataAppBlockLayoutContext.Provider value={blockLayoutContext}>
         <DashboardAskProvider
           canEdit={ownerCanEdit}
-          enabled={canUseDashboardAsk({ canEdit: ownerCanEdit, mode })}
-          explorationEnabled={mode === "view"}
+          enabled={!publicView && canUseDashboardAsk({ canEdit: ownerCanEdit, mode })}
+          explorationEnabled={!publicView && mode === "view"}
           dashboardTitle={appTitle}
           onStatus={setActionStatus}
         >
           <div className="dashboard-root">
             <DataAppTopbar
+              publicView={publicView}
               title={appTitle}
               buildStatus={snapshot.buildStatus}
               generatedAt={snapshot.generatedAt}
@@ -1190,7 +1193,7 @@ export function DataAppShell({
               onPreviewEnd={() => applyDataAppTheme(displayedTheme)}
             />
             <DataAppToast message={actionStatus} onDismiss={() => setActionStatus("")} />
-            {hosted && <DataAppHandoffDialog onStatus={setActionStatus} />}
+            {hosted && !publicView && <DataAppHandoffDialog onStatus={setActionStatus} />}
             {chartExport && <ChartExportDialog {...chartExport} resolveColor={resolveColor} onClose={() => setChartExport(null)} />}
 
             <main
@@ -1199,7 +1202,7 @@ export function DataAppShell({
               className={`page${snapshot.surface === "report" ? " report-page" : ""}`}
               data-data-app-content={snapshot.surface}
               data-dashboard-page={activeTabId}
-              onClick={hosted ? openAuthoredReportFollowUp : undefined}
+              onClick={hosted && !publicView ? openAuthoredReportFollowUp : undefined}
               onDoubleClick={
                 canEdit
                   ? (event) => {

@@ -65,7 +65,7 @@ export default defineConfig(({ command, isSsrBuild }) => ({
             });
           },
           transformIndexHtml: () =>
-            localThreadId
+            command === "serve" && localThreadId
               ? [
                   {
                     tag: "meta",

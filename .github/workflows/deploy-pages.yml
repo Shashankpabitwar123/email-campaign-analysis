@@ -6,6 +6,9 @@ on:
     paths:
       - 'site/**'
       - 'scripts/verify_site.py'
+      - 'scripts/package_site.py'
+      - 'web/protected-runtime.json'
+      - 'web/src/data.json'
       - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
 

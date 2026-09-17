@@ -6,7 +6,7 @@
     "src/data.json"
   ],
   "files": {
-    ".openai/hosting.json": "89610cb100afd3db32d865423a69a3fe2de1da54150570ea979a63143a6d5bdd",
+    ".openai/hosting.json": "9b77fea4fe7b2b73f396fb68e48cf4cf7f101e9e883370e6f1133c48151859bb",
     "AGENTS.md": "215baf947a82508f9aa349acce5fb747e43aaf874ddf7b9b11436b80fab50240",
     "docs/components/README.md": "c24c56d48a2b491a0a648ec0beee10f43d12c8d7fe2b5e74d89879fd31879419",
     "docs/components/async-data.md": "ddd293d4e1200a3c4814e520443dd9e22c1214b102deef877e0eb7da132cfb7d",
@@ -27,10 +27,10 @@
     "scripts/authorize-protected-change.mjs": "9b9f012d65c34a1f9ac4d107ba226f82aadabde72980c2d393c63e9d68eff6a3",
     "scripts/protected-file-digest.mjs": "2583e42fafb0d0fab7342b8dca163fe0d6771928dc41c830fbdfdee3af821822",
     "scripts/verify-protected-runtime.mjs": "47d95847a9135cd125581a4b994208adc3822cbef4a2c8bfaf562f0d2ef3a9af",
-    "src/App.jsx": "2f4b8f28c24ee9498c8de670a7f9c7fb79a584c67f67d88b782ec301838cc54b",
+    "src/App.jsx": "958c8a386cbfb64c6557a4f566eca2c5a56750093feaa0aa0cc515fb50d053f9",
     "src/DataAppContext.jsx": "309d971e9fd4494b2f704087c81ded8837ec955ae4a57898f54dd776c8fca30f",
-    "src/DataAppRuntime.jsx": "3008a08c2a79c90a5ea5cb3f91b7f77113dfca1e8c4578bf47c34bd9932bd088",
-    "src/DataAppShell.jsx": "004aa988679e158e668b8dd8c151869e9b6106cd31eeb33de0b51fc51c107259",
+    "src/DataAppRuntime.jsx": "e2a30dacde48e0dc641e3b9db7cda0cb876b2a42befae0d31036f5dee585735d",
+    "src/DataAppShell.jsx": "fb4eb36db259273476d9ea5d80b96fdf6b59d88f10f0c8a6686e3b5d701efd16",
     "src/block-layout.js": "385da9c5081f9a24ee3eb8948b87aa7a6c6b0f1b7b37d26c91ae07fb01a81c8b",
     "src/build-state.js": "1fe7e56e5e8173e0da5d432600f385b13d9133cbeb243ef26edd97985babf6d8",
     "src/card-image.js": "b91c236f6e3b1c1bf5d7ca8085a4378770336b671dc3e36e403efa91995e851c",
@@ -77,7 +77,7 @@
     "src/components/CustomBlockHost.jsx": "b7bfec00a46435291b07d32ff39a2ec65e309aa532902fd94e9b1c72a8994a32",
     "src/components/DashboardAsk.jsx": "5664289776e4ed8544ffb45474691908e2bff1c520e88a467b288a26822ac94d",
     "src/components/DashboardTabs.jsx": "5490439c56960f12f62cc99bdadcb8d24e60707a0aa901b3225346fb8b1f5f5b",
-    "src/components/DataAppChrome.jsx": "6eae567b93a5f5c1ca4eccecfbdf3d85398f181e2e7d2f3e3447b6f5ade50233",
+    "src/components/DataAppChrome.jsx": "8bd5e6a885a8a5fafc763b9397dbb92322e0f2aacace9fab916b3c2753d9feef",
     "src/components/DataAppHandoffDialog.jsx": "3bd1db7e4c0a5804d2dbed3625b096f3b25b1d4dc8441e8817a278355faea2bb",
     "src/components/DataAppLoadingContent.jsx": "bcfec0818ea0c90f75697f35a0f8e5d3b649314ad9daaadaabfecb945d6a3483",
     "src/components/DataAppToast.jsx": "1c80d8723f951755c132c5b1e51fab8dafd38cd6312ad7bc9e5a98d4403c2213",
@@ -239,6 +239,6 @@
     "src/use-sortable-blocks.js": "5462804b0f62fcfc7fad6a581b1025057f827a368a0c528d218000c7928ba666",
     "src/verification-reminder.js": "9c135c75d15ef1a43aa98efd5db51aed44afbacb86206d073608cdb764957bc0",
     "src/worker.js": "bc859b3fcb14dc269367d5aecbbea5f6d307a477a607b3e376f992a8748b30f7",
-    "vite.config.js": "da62d7d91fbf0e75f234a3f8e6d5adf91914babe53926972eeff6ac0f9544e1b"
+    "vite.config.js": "49a4274b61429fa8dbf1e32b9ab8b80cd551e68938ada4c94edb79c061d60dfe"
   }
 }

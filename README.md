@@ -67,7 +67,7 @@ The Excel deliverable can be opened and edited directly. Its authoring script us
 
 The public report is hosted on **GitHub Pages** from the verified `site/` package. See [hosting and deployment](docs/hosting.md) for the publication workflow.
 
-The website's authored analysis is in `web/src/content/dashboard/`. Its included shared Data runtime owns the report controls and export behavior. The validated publication uses that runtime's pinned builder. A source build uses the included package lock and `npm ci && npm run build` in `web` with a compatible Node version; this alternative source build is not the publication path validated here. Preserve `web/AGENTS.md` and runtime integrity metadata.
+The website's authored analysis is in `web/src/content/dashboard/`. The public report uses an explicitly enabled visitor mode: readers can explore filters and scenarios, but there are no ChatGPT, Publish or editing controls. The publication is built from the included source runtime and package lock. See [hosting and deployment](docs/hosting.md) for source-build and package-verification commands. Preserve `web/AGENTS.md` and runtime integrity metadata.
 
 ## Data and attribution
 
