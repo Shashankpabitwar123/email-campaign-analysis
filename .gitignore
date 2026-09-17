@@ -15,3 +15,6 @@ artifacts/previews/
 *.log
 
 *.inspect.ndjson
+web/.data-app-assets/
+web/.data-app-offline/
+web/.data-app-publish/
