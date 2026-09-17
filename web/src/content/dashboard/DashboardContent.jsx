@@ -38,14 +38,31 @@ function Evidence({id,queryId,title,rows,children,description,...rest}){
 }
 function ResultView({rows,effects,direct,diag}){
  const all=rows.reduce((s,r)=>s+r.customers,0);
+ const men=effects.find(r=>r.campaign==="Men's merchandise");
+ const women=effects.find(r=>r.campaign==="Women's merchandise");
+ const storyRows=rows.map(r=>({...r,buyers_per_1000:r.conversion_rate*1000}));
  return <>
-   <DataComponent id="result-summary" queryId="campaign_effects" queryIds={['campaign_effects','campaign_summary']} kind="narrative" title="What the experiment tells us" displayRows={effects} sourceRowsByQuery={{campaign_effects:effects,campaign_summary:rows}} variant="plain">
-    <div className="eca-lead"><p className="eca-takeaway" data-editable-id="result-takeaway">Both emails increased purchases. The men's-merchandise email produced the stronger conversion result.</p><p className="eca-muted">Historical randomized experiment · {num(all)} customers · two-week follow-up · 2008</p></div>
+   <DataComponent id="result-summary" queryId="campaign_summary" queryIds={['campaign_summary','campaign_effects']} kind="narrative" title="The project in one minute" displayRows={storyRows} sourceRowsByQuery={{campaign_summary:rows,campaign_effects:effects}} variant="plain">
+    <div className="eca-story">
+     <p className="eca-takeaway" data-editable-id="result-takeaway">A store wants to know whether its emails bring in extra buyers.</p>
+     <p className="eca-body">Before paying for another campaign, it needs to know which email works and whether the extra sales could cover the cost.</p>
+     <p className="eca-body">I analyzed Kevin Hillstrom's public experiment from <strong>2008</strong>: <strong data-reviewed-rows>{num(all)} customers</strong> were randomly split into the three groups below. Their visits, purchases and spending were tracked for <strong>two weeks</strong>.</p>
+     <div className="eca-story-groups" data-reviewed-rows aria-label="Purchase results per 1,000 customers">
+      {storyRows.map(r=><div className="eca-story-group" key={r.campaign}>
+       <span>{r.campaign==='No email'?'No email':r.campaign.replace('merchandise','products')+' email'}</span>
+       <strong>About {num(r.buyers_per_1000)} buyers</strong>
+       <span>per 1,000 customers · {pct(r.conversion_rate)} bought</span>
+      </div>)}
+     </div>
+     <p className="eca-body">Some customers bought even without an email. Compared with that group, the men's email brought in about <strong data-reviewed-rows>{num(men.difference*1000)} extra buyers per 1,000</strong>, and the women's email about <strong data-reviewed-rows>{num(women.difference*1000)} extra buyers</strong>.</p>
+     <p className="eca-story-decision"><strong>My recommendation:</strong> make the men's-products email the leading option in a fresh test with today's customers. A 2008 result needs to be tested again before spending heavily.</p>
+     <p className="eca-note">I checked the data, compared the groups and built the budget model. I did not run the original campaign. The email names describe products, not the customers' gender.</p>
+    </div>
    </DataComponent>
-   <div className="eca-definition"><strong>The question:</strong> Did customers buy because they were assigned an email? Compare each campaign with customers assigned no email—not just with the other campaign.</div>
+   <div className="eca-definition"><strong>Explore the evidence:</strong> the charts below show the exact results and uncertainty. Customer segments compares shopping histories; Budget &amp; next test lets you change costs; Methods &amp; downloads explains the calculations and shares the files.</div>
    <SortableRegion id="results:charts" variant="canvas" columns={12} spacing="standard" rows={[{id:'results:rates',items:['conversion-rates','purchase-effects']},{id:'results:revenue',items:['revenue-effects','campaign-comparison']}]}>
     <SortableItem id="conversion-rates" label="Purchase conversion" kind="chart" span={6}>
-     <EvidenceChart id="conversion-rates" queryId="campaign_summary" title="Purchase conversion" rows={rows.map(r=>({...r,conversionRate:r.conversion_rate}))} sourceRows={rows} variant="card" height={265} spec={{type:'bar',x:'campaign',y:'conversionRate',stackable:false,valueDecimals:2,showXAxisLabel:false,yLabel:'Share of assigned customers'}}>
+     <EvidenceChart id="conversion-rates" queryId="campaign_summary" title="How many customers bought something?" rows={rows.map(r=>({...r,conversionRate:r.conversion_rate}))} sourceRows={rows} variant="card" height={265} spec={{type:'bar',x:'campaign',y:'conversionRate',stackable:false,valueDecimals:2,showXAxisLabel:false,yLabel:'Share of assigned customers'}}>
        <div className="eca-rate-labels" data-reviewed-rows>{rows.map(r=><div key={r.campaign}><strong>{pct(r.conversion_rate)}</strong><span>{num(r.purchasers)} / {num(r.customers)} customers</span></div>)}</div>
      </EvidenceChart>
     </SortableItem>
@@ -85,7 +102,7 @@ function SegmentView(){
  const props=scope.componentProps('segment_effects',['dimension','segment','campaign']);
  const rows=props.displayRows.map(r=>({...r,display_label:`${r.segment} · ${r.campaign}`}));
  return <Section id="segments-title" title="Where do the effects differ?" filters={<Filters {...scope.filterProps}/>}>
-  <p className="eca-muted">These are exploratory comparisons using customer characteristics recorded before the email. Wide intervals mean a segment estimate is imprecise; they are not a validated targeting rule.</p>
+  <p className="eca-muted">Did the emails work differently for customers with different shopping histories? Choose a customer group and an email to explore. Each result compares that group's buyers with similar customers who received no email. These patterns are clues for a future test, not a proven rule for whom to target.</p>
   <DataComponent id="segment-intervals" queryId="segment_effects" title="Conversion uplift within each segment" kind="chart" variant="card" {...props} displayRows={rows}>
    {rows.length?<Intervals rows={rows} estimate="difference" low="ci_low" high="ci_high" label="display_label"/>:<p>No observations match these filters.</p>}
    <p className="eca-note">Individual 95% intervals are not adjusted for the many segment comparisons. Each row compares customers within the same segment. “Newbie” is the source's binary flag; detailed qualification rules are unavailable.</p>
@@ -104,7 +121,7 @@ function BudgetView({effects,power}){
  const curve=Array.from({length:21},(_,i)=>{const contacts=i*5000;return {contacts,...Object.fromEntries(effects.map(e=>[e.campaign,contacts*(e.incremental_revenue*a.margin/100-a.sendCost/100)-a.fixedCost]))}});
  return <>
  <Section id="budget-title" title="Would the campaign be worth repeating?">
-  <p className="eca-muted">Scenario model. Costs and contribution margin are assumptions; response estimates come from the historical experiment. Change the inputs to see where the decision changes.</p>
+  <p className="eca-muted">Extra sales are useful only if they cover the campaign's costs. Change how many customers receive an email, how much the business keeps from each extra sales dollar (contribution margin), and the costs. The results are estimates using the old experiment and your assumptions—not profit actually earned.</p>
   <DataComponent id="budget-model" queryId="campaign_effects" title="Campaign contribution after assumed costs" kind="chart" variant="card" displayRows={modeled} sourceRows={effects}>
    <div className="eca-budget-layout"><div className="eca-controls">{controls.map(([field,label,min,max,step,fmt])=><Slider key={field} label={label} value={a[field]} min={min} max={max} step={step} formatValue={fmt} onChange={value=>setAssumptions(current=>({...current,[field]:value}))}/>)}<Button onClick={()=>setAssumptions({...defaults})}>Reset assumptions</Button></div>
    <div aria-live="polite" data-reviewed-rows>{modeled.map(e=><div className="eca-budget-result" key={e.campaign}><span>{campaignName(e.campaign)}</span><strong className={e.modeled_contribution>=0?'eca-positive':'eca-negative'}>{usd(e.modeled_contribution,0)}</strong><span>Historical-effect interval: {usd(e.lower_contribution,0)} to {usd(e.upper_contribution,0)}</span></div>)}</div></div>

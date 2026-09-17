@@ -41,3 +41,25 @@ verification. Automated headless Chromium checks passed at 1365px and 390px:
 These checks used the available Playwright runtime because the Browser plugin
 was not available. No screenshots or manual visual review were performed for
 this revision, at the owner's request. The owner will review the appearance.
+
+## Plain-language project story — September 17, 2026
+
+The README now leads with the business problem, experiment setup, rounded buyers
+per 1,000 customers, recommendation and personal contribution. The opening
+through the recommendation is approximately 195 words, including Markdown link
+labels and table markup. Setup instructions and the detailed skills table moved
+to `docs/reproduction.md`.
+
+The report's first view now explains the same story before the detailed charts.
+Its displayed 6 / 13 / 9 buyers and 7 / 3 extra buyers are calculated from the
+reviewed rates, not separate illustrative data. The 2008 study date, two-week
+follow-up, original-study attribution and distinction between analysis and
+running a campaign remain visible. Segment and budget introductions also use
+plain language.
+
+Automated Chromium checks passed at 1365px and 390px for opening-story content,
+reviewed counts, all four tabs, segment filtering, budget/reset calculations,
+absence of authoring controls and runtime errors, and page overflow. Local
+Markdown links resolve and the aggregate snapshot hash is unchanged. This
+revision did not include screenshots or manual visual review; the owner will
+check the appearance.

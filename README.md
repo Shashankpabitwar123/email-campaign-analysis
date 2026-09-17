@@ -1,76 +1,61 @@
 # Email Campaign Analysis
 
-**[Live Report](https://shashankpabitwar123.github.io/email-campaign-analysis/)** · **[Excel Workbook](artifacts/Email_Campaign_Budget.xlsx)** · **[Analysis Notebook](artifacts/Email_Campaign_Analysis.ipynb)**
+**A store wants to know whether promotional emails bring in extra buyers—and which email to send next.**
 
-**Did an email cause additional purchases, and would repeating it be worth the cost?**
+I explored this using Kevin Hillstrom's public experiment from **2008**, with **64,000 customers**. Customers were randomly split into three groups: an email about men's products, an email about women's products, or no email. Their visits, purchases and spending were tracked for **two weeks**.
 
-An independent portfolio project by **Shashank Pabitwar**, analyzing a historical, randomized experiment involving 64,000 customers. The project connects SQL data preparation, statistical inference, Excel business modeling and an interactive report.
+**[Explore the live report](https://shashankpabitwar123.github.io/email-campaign-analysis/)** · **[Open the Excel budget model](artifacts/Email_Campaign_Budget.xlsx)**
 
-## Start with the result
+## The result in plain language
 
-| Assignment | Customers | Purchasers | Purchase conversion | Revenue / customer |
-|---|---:|---:|---:|---:|
-| No email | 21,306 | 122 | 0.57% | $0.65 |
-| Men's merchandise email | 21,307 | 267 | 1.25% | $1.42 |
-| Women's merchandise email | 21,387 | 189 | 0.88% | $1.08 |
+To compare the groups fairly, these results are shown for every 1,000 customers:
 
-The men's email increased conversion by **0.68 percentage points** versus no email, equivalent to approximately **6.8 additional purchasers per 1,000 assigned customers**. The women's email increased conversion by **0.31 points**. Both comparisons remain significant after a Holm correction for two tests.
+| Group | Roughly how many bought something? |
+|---|---:|
+| No email | **6 out of 1,000** |
+| Men's products email | **13 out of 1,000** |
+| Women's products email | **9 out of 1,000** |
 
-**Decision:** make the men's creative the lead candidate in a fresh experiment. Do not assume a 2008 result will reproduce today. Under illustrative assumptions of 10,000 contacts, 50% contribution margin, $0.05 per email and $500 fixed cost, the men's email yields **$2,849 modeled contribution**. That is a scenario, not observed profit.
+Some customers bought even without an email. Compared with that group, the men's email brought in about **7 extra buyers per 1,000 customers**, and the women's email about **3 extra buyers**.
 
-![Purchase conversion by randomized assignment](artifacts/figures/conversion.png)
+**My recommendation:** make the men's-products email the leading option in a fresh test with today's customers. The data is from 2008, so the result needs to be tested again before spending heavily.
 
-## Explore the project
+## What I did
 
-- [Decision memo](docs/decision-memo.md): recommendation, evidence and what would change the decision.
-- [Executed notebook](artifacts/Email_Campaign_Analysis.ipynb): readable, editable analysis with code, checks and figures.
-- [Excel budget workbook](artifacts/Email_Campaign_Budget.xlsx): XLOOKUP, SUMIFS, input validation, scenario formulas and responsive charts.
-- [Methodology](docs/methodology.md): estimands, tests, confidence intervals, diagnostics and limitations.
-- [Fresh experiment plan](docs/future-experiment.md): business decision, metrics, sample size and stopping rules.
-- [Data dictionary](docs/data-dictionary.md): source fields, reporting tables and denominator rules.
-- [Interview guide](docs/interview-guide.md): explain the project and answer the difficult questions.
-- [Resume description](docs/resume-description.md): concise, evidence-backed wording.
+I analyzed an existing experiment; I did not send the emails or run the original campaign.
 
-All verified links are in [project-links.md](docs/project-links.md). The website is a published snapshot of this analysis; it is not connected to a live company database. A [Power BI companion kit](powerbi/README.md) is included as prepared CSV and DAX source; it is not a completed native Power BI report.
+1. **Checked the data** with SQL and Python so the groups and totals could be trusted.
+2. **Compared the results** and used statistical tests to assess whether the differences could be explained by chance.
+3. **Explored customer groups** using their previous shopping behavior.
+4. **Built an Excel budget model and interactive report** to connect the findings to a spending decision.
 
-## What this demonstrates
+![Purchase rates in the three experiment groups](artifacts/figures/conversion.png)
 
-| Analyst skill | Concrete evidence |
+The exact purchase rates were **0.57% without email, 1.25% for the men's email and 0.88% for the women's email**. The counts above are rounded for readability. [See the full findings and uncertainty](docs/decision-memo.md).
+
+## Follow the story in the live report
+
+| Report tab | What you can understand or try |
 |---|---|
-| Business problem definition | Incremental purchase question; explicit recommendation and decision thresholds |
-| SQL | Five scripts; CTEs, joins, conditional transformations, aggregation, window ranking, and reconciled reporting grains |
-| Data quality | 27 checks across schema, values, denominators and financial reconciliation |
-| Experiment analysis | Randomized control, intention-to-treat denominator, Fisher exact tests, multiple-testing correction |
-| Statistics | Newcombe intervals, Wilson intervals, 5,000 bootstrap resamples, HC3 regression sensitivity and power planning |
-| Excel | Editable budget, XLOOKUP, SUMIFS, validation, break-even calculation and charts |
-| Communication | Four report views, short memo, definitions and an honest distinction between evidence and assumptions |
-| Reproducibility | Source checksum, fixed random seed, executed notebook, automated tests and version-controlled analysis |
+| Results | Understand the experiment and compare extra purchases and revenue |
+| Customer segments | Explore whether the pattern differs by previous shopping behavior |
+| Budget & next test | Change campaign costs and customer numbers, then see whether the extra sales could cover the costs |
+| Methods & downloads | Check the evidence, definitions and calculations, or download the work |
 
-## Reproduce the analysis on macOS, Linux or Windows
+The budget figures are **estimates based on assumptions**, not money I earned or profit observed in this study. For example, the men's email gives an estimated **$2,849 after the modeled costs** with 10,000 contacts, 50% contribution margin, a $0.05 email cost and a $500 fixed campaign cost. Changing those assumptions changes the answer.
 
-Use Python 3.12 or newer in an isolated environment. No Windows virtual machine or paid BI license is needed for the Python analysis or public report.
+## About the data
 
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-python scripts/fetch_data.py
-python scripts/analyze.py
-python scripts/prepare_excel_data.py
-python -m pytest tests -q
-python scripts/create_notebook.py
-```
+Each row represents one customer: their past shopping behavior, assigned email group, and visits, purchases and spending during the follow-up. The email names describe the products advertised, not the customers' gender.
 
-On Windows, activate with `.venv\Scripts\activate` instead. The historical provider serves the raw file over HTTP; the downloader checks the exact reviewed SHA-256 and stops if the bytes differ. It does not disable HTTPS certificate checks.
+Source: [Kevin Hillstrom's MineThatData email experiment, March 2008](https://blog.minethatdata.com/2008/03/minethatdata-e-mail-analytics-and-data.html). This is a historical analysis prepared in September 2026. Customer-level files are excluded from this repository; the project includes aggregate results and a downloader that verifies the original file. Source and redistribution limits are recorded in the [data dictionary](docs/data-dictionary.md) and [reproduction guide](docs/reproduction.md).
 
-The Excel deliverable can be opened and edited directly. Its authoring script uses the Codex-provided `@oai/artifact-tool` JavaScript package; regenerating that workbook requires that environment. Core analysis, tests, CSV outputs and the notebook use the Python packages above.
+## Inspect the work
 
-The public report is hosted on **GitHub Pages** from the verified `site/` package. See [hosting and deployment](docs/hosting.md) for the publication workflow.
+- **Analysis:** [Executed Python notebook](artifacts/Email_Campaign_Analysis.ipynb) · [SQL queries](sql/) · [Statistical methods](docs/methodology.md)
+- **Business decision:** [Decision memo](docs/decision-memo.md) · [Excel workbook](artifacts/Email_Campaign_Budget.xlsx) · [Plan for a new experiment](docs/future-experiment.md)
+- **Quality and reproduction:** [Validation record](docs/validation.md) · [Data definitions](docs/data-dictionary.md) · [Run the project](docs/reproduction.md)
 
-The website's authored analysis is in `web/src/content/dashboard/`. The public report uses an explicitly enabled visitor mode: readers can explore filters and scenarios, but there are no ChatGPT, Publish or editing controls. The publication is built from the included source runtime and package lock. See [hosting and deployment](docs/hosting.md) for source-build and package-verification commands. Preserve `web/AGENTS.md` and runtime integrity metadata.
+A [Power BI companion folder](powerbi/README.md) contains prepared CSVs and DAX; it is an import kit, not a completed Power BI report. The live website above is the completed interactive report.
 
-## Data and attribution
-
-Source: Kevin Hillstrom, [MineThatData E-Mail Analytics and Data Mining Challenge, March 20, 2008](https://blog.minethatdata.com/2008/03/minethatdata-e-mail-analytics-and-data.html). The analysis was prepared in September 2026. Raw and cleaned customer records are excluded from this repository; the downloader retrieves the original source. No explicit redistribution license was found on the source page. Public files contain derived aggregate analysis outputs.
-
-This is a reanalysis, not a claim that I ran the original experiment, worked for the source company, or delivered a realized revenue improvement. Campaign names identify merchandise, not recipient gender. Segment exploration is not a validated targeting model.
+Built by **Shashank Pabitwar** · SQL, Python, Excel and interactive reporting
